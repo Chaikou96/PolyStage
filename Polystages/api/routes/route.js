@@ -10,11 +10,14 @@ module.exports = function (app) {
   var QuestionControlleur = require('../controllers/questionController');
   var FormControlleur = require('../controllers/formController');
   var MailControlleur = require('../controllers/mailController')
-
+  
   app.route('/entreprises')
     .get(EntrepriseControlleur.list_all_entreprises)
     .post(EntrepriseControlleur.create_entreprise);
-
+  
+  app.route('/entreprises/ById/:identreprise')
+    .get(EntrepriseControlleur.get_entreprise_name_by_id)
+  
   app.route('/enseignants')
     .get(EnseignantControlleur.list_all_enseignants);
 
@@ -35,13 +38,19 @@ module.exports = function (app) {
 
   app.route('/stages')
     .get(StageControlleur.list_all_stages);
-
+  
   app.route('/stages/update')
     .get(MailControlleur.verif_dates_stage);
 
   app.route('/stages/:idstage')
     .get(StageControlleur.list_stage_byId)
     .put(FormControlleur.update_stage_byId);
+  
+  app.route('/stages/byIdEleve/:ideleve')
+    .get(StageControlleur.list_stage_byeleveId);
+  
+  app.route('/stages/byVal/:val')
+    .get(StageControlleur.list_stage_byVal);
 
   app.route('/stages/eval/:idstage')
     .get(StageControlleur.list_stage_byIdForEval)

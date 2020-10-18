@@ -4,13 +4,13 @@ const config = {
   },
   db: {
     host: 'localhost',
-    port: 3306,
-    database: 'phpmyadmin',
-    user: 'phpmyadmin',
+    port: 8889,
+    database: 'Polystages',
+    user: 'root',
     password: 'root'
   },
   gmail: {
-    user: 'bobocheck2006@gmail.com',
+    user: 'aymendamak2@gmail.com',
     mdp: '...'
   }
 };

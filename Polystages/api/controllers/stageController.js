@@ -3,9 +3,7 @@
 var Stage = require('../models/StageModel.js');
 
 exports.list_all_stages = function (req, res) {
-
   Stage.getAllStage(function (err, stages) {
-
     if (err)
       res.send(err);
     res.send(stages);
@@ -14,6 +12,14 @@ exports.list_all_stages = function (req, res) {
 
 exports.list_stage_byeleveId = function (req, res) {
   Stage.getStageByEleveId(req.params.eleveId, function (err, stages) {
+    if (err)
+      res.send(err);
+    res.send(stages);
+  })
+}
+
+exports.list_stage_byVal = function (req, res) {
+  Stage.getStage(req.params.val, function (err, stages) {
     if (err)
       res.send(err);
     res.send(stages);

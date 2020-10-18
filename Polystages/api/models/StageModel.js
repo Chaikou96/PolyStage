@@ -90,6 +90,24 @@ Stage.getStageByEleveId = function (ideleve, result) {
     });
 }
 
+Stage.getStage = function (val, result) {
+    let query
+    if (parseInt(val))
+        query = `Select * from stage where ( annee = ${val} ) or ( niveau = "${val}" ) `    
+    else 
+        query = `Select * from stage where ( titrestage like '${val}%' ) or ( description like '${val}%' )`
+    
+    db.query(query, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else {
+            result(null, res);
+        }
+    });
+}
+
 Stage.getStageByTuteurId = function (idtuteur, result) {
     var query = "Select * from stage natural join entreprise left join eleves on eleves.ideleve = stage.ideleve where idtuteur = ? order by annee desc"
     db.query(query, idtuteur, function (err, res) {

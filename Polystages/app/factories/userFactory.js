@@ -6,6 +6,13 @@ simpleApp.factory('userFactory', function ($http) {
                 url: 'http://localhost:8080/authentification',
                 params: { "username": identifiant, "password": sha512(password) }
             })
-        }
+        },
+        getEleveNameById: function (id) {
+            return $http({
+                method: 'GET',
+                url: 'http://localhost:8080/eleves/' + id,
+                params : { 'eleveId' : id }
+            })
+        },
     }
 })

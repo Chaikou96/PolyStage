@@ -1,8 +1,60 @@
-controllers.controller('adminController', function ($scope, $rootScope, retardsFactory, mailsFactory, $location, $timeout) {
+controllers.controller('adminController', function ($scope, $rootScope, retardsFactory, mailsFactory, stageFactory, userFactory, entreprisesFactory, $location, $timeout) {
   $scope.checkIsAdmin = function () {
     if ($rootScope.admin != 1)
       $location.path("/404")
   }
+
+  // une grande partie doit se deplacer dans un nouveau controller rechercherStageController 
+  $scope.stageItem;
+
+  $scope.init = function(item)
+  {
+    stageItem = item;
+  };
+
+  $scope.allStages = function () {
+    var val = document.getElementById("searchBar").value
+    stageFactory.getStagesByVal(val)
+      .then(function (success) {
+        $scope.stages = success.data
+        $scope.getNomEntreprise($scope.stages)
+      }, function (error) {
+        //$scope.erreurAuthentification()
+      })
+  }
+
+  $scope.allStagesInfosById = function () {
+    stageFactory.getStageById(stageItem.idstage)
+      .then(function (success) {
+        $scope.stages = success.data
+        $scope.getNomEntreprise($scope.stages)
+        $scope.getNomPrenomEleve($scope.stages)
+      }, function (error) {
+        //$scope.erreurAuthentification()
+      })
+  }
+
+  $scope.getNomEntreprise = function (stages) {
+    $scope.stages.forEach(element => {
+      entreprisesFactory.getEntreprisesNameById(element.identreprise)
+        .then(function (success) {
+          element.nomentreprise = success.data[0].nomcomplet
+        })
+    });
+  }
+
+  $scope.getNomPrenomEleve = function (stages) {
+    $scope.stages.forEach(element => {
+      userFactory.getEleveNameById(element.ideleve)
+        .then(function (success) {
+          console.log(success.data[0])
+          element.nomEleve = success.data[0].nom
+          element.prenomEleve = success.data[0].prenom
+        })
+    });
+  }
+
+  // une grande partie doit se deplacer dans un nouveau controller rechercherStageController 
 
   $scope.getRetards = function () {
     $timeout(function () {

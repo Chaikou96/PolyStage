@@ -21,6 +21,14 @@ simpleApp.config(['$routeProvider',
         templateUrl: 'app/views/admin.html',
         controller: 'adminController'
       }).
+      when('/rechercherStage', {
+        templateUrl: 'app/views/rechercherStage.html',
+        controller: 'adminController'
+      }).
+      when('/detailsDuStage', {
+        templateUrl: 'app/views/detailsDuStage.html',
+        controller: 'adminController'
+      }).
       when('/evaluation/stage/:idstage', {
         templateUrl: 'app/views/eval.html',
         controller: 'evalController'

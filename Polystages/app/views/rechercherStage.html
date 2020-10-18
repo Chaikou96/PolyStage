@@ -1,0 +1,29 @@
+<h1 class="mt-2">Rechercher un Stage</h1>
+<div class="md-form mt-0"  >
+    <input ng-change="allStages(searchValue)" id="searchBar" ng-model="searchValue" class="form-control" type="text" placeholder="Search" aria-label="Search">
+    <button ng-click="allStages(searchValue)"  class="btn btn-outline-primary btn-block ">Search</button>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Titre du stage</th>
+            <th scope="col">Description du stage</th>
+            <th scope="col">Nom de l'entreprise</th>
+            <th scope="col">Promo</th>
+            <th scope="col">Année</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="(key, stage) in stages" >
+            <th scope="row">{{key+1}}</th>
+            <td>{{stage.titrestage}}</td>
+            <td>{{stage.description}}</td>
+            <td>{{stage.nomentreprise}}</td>
+            <td>{{stage.niveau}}</td>
+            <td>{{stage.annee}}</td>
+            <td> <a href="#!/detailsDuStage" > <button ng-click="init(stage)"  class="btn btn-outline-primary ">Détails</button> </a> </td>
+          </tr>
+        </tbody>
+      </table>
+</div>

@@ -1,0 +1,42 @@
+<h1 class="mt-2">Détails sur le stage</h1>
+<div class="md-form mt-0" >
+  <a ng-click="allStagesInfosById()" class="btn btn-primary" ng-if="!getDetail" >Afficher détails</a>
+  <div class="card text-center" ng-repeat="stage in stages">
+    <div class="card-header">
+      <h3> {{stage.titrestage}} </h3>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Nom de l'entreprise</h5>
+      <p class="card-text">{{stage.nomentreprise}}</p>
+
+      <h5 class="card-title">Nom du stagiaire</h5>
+      <p class="card-text">{{stage.nomEleve}}</p>
+
+      <h5 class="card-title">Prénom du stagiaire</h5>
+      <p class="card-text">{{stage.prenomEleve}}</p>
+
+      <h5 class="card-title">Année</h5>
+      <p class="card-text">{{stage.annee}}</p>
+
+      <h5 class="card-title">Promo</h5>
+      <p class="card-text">{{stage.niveau}}</p>
+
+      <h5 class="card-title">Date du début</h5>
+      <p class="card-text">{{stage.datedebut}}</p>
+
+      <h5 class="card-title">Date de la fin </h5>
+      <p class="card-text">{{stage.datefin}}</p>
+
+      <h5 class="card-title">Description du stage</h5>
+      <p class="card-text">{{stage.description}}</p>
+
+      <h5 class="card-title" ng-if="stage.adressestage" >Adresse du stage</h5>
+      <p class="card-text">{{stage.adressestage}}</p>
+      
+      <a href="#!/rechercherStage" class="btn btn-primary">Go Back</a>
+    </div>
+    <div class="card-footer text-muted">
+      
+    </div>
+  </div>
+</div>
