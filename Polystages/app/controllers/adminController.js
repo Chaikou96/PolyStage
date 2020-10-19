@@ -5,14 +5,29 @@ controllers.controller('adminController', function ($scope, $rootScope, retardsF
   }
 
   // une grande partie doit se deplacer dans un nouveau controller rechercherStageController 
-  $scope.stageItem;
+
+
 
   $scope.init = function(item)
   {
     stageItem = item;
   };
 
-  $scope.allStages = function () {
+  // recuperer tous les stages
+  $scope.getAllStages = function () {
+    stageFactory.getAllStages()
+      .then(function (success) {
+        $scope.stages = success.data
+        $scope.getNomEntreprise($scope.stages)
+      }, function (error) {
+        //$scope.erreurAuthentification()
+      })
+  }
+
+  $scope.getAllStages()
+
+  // recuperer les stages avec la valeur dans search bar
+  $scope.allStagesBySearchValue = function () {
     var val = document.getElementById("searchBar").value
     stageFactory.getStagesByVal(val)
       .then(function (success) {
@@ -23,19 +38,21 @@ controllers.controller('adminController', function ($scope, $rootScope, retardsF
       })
   }
 
+  // recuperer un stage avec Id
   $scope.allStagesInfosById = function () {
     stageFactory.getStageById(stageItem.idstage)
       .then(function (success) {
-        $scope.stages = success.data
-        $scope.getNomEntreprise($scope.stages)
-        $scope.getNomPrenomEleve($scope.stages)
+        $scope.stageItem = success.data
+        $scope.getNomEntreprise($scope.stageItem)
+        $scope.getNomPrenomEleve($scope.stageItem)
       }, function (error) {
         //$scope.erreurAuthentification()
       })
   }
 
-  $scope.getNomEntreprise = function (stages) {
-    $scope.stages.forEach(element => {
+  // recuperer le nom de l entreprise avec son id 
+  $scope.getNomEntreprise = function (stage) {
+    stage.forEach(element => {
       entreprisesFactory.getEntreprisesNameById(element.identreprise)
         .then(function (success) {
           element.nomentreprise = success.data[0].nomcomplet
@@ -43,8 +60,9 @@ controllers.controller('adminController', function ($scope, $rootScope, retardsF
     });
   }
 
-  $scope.getNomPrenomEleve = function (stages) {
-    $scope.stages.forEach(element => {
+  // recuperer le nom et le prenom de l'eleve avec son id
+  $scope.getNomPrenomEleve = function (stage) {
+    stage.forEach(element => {
       userFactory.getEleveNameById(element.ideleve)
         .then(function (success) {
           console.log(success.data[0])
