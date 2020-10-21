@@ -1,6 +1,7 @@
 <h1 class="mt-2">Détails sur le stage</h1>
 <div class="md-form mt-0" >
   <a ng-click="allStagesInfosById()" class="btn btn-primary" ng-if="!getDetail" >Afficher détails</a>
+  <a href="#!/rechercherStage" class="btn btn-primary">Go Back</a>
   <div class="card text-center" ng-repeat="stage in stageItem">
     <div class="card-header">
       <h3> {{stage.titrestage}} </h3>
@@ -32,8 +33,9 @@
 
       <h5 class="card-title" ng-if="stage.adressestage" >Adresse du stage</h5>
       <p class="card-text">{{stage.adressestage}}</p>
-      
-      <a href="#!/rechercherStage" class="btn btn-primary">Go Back</a>
+    
+      <a ng-click="jsonToCsv(stage)" class="btn btn-primary">Donwload .csv</a>
+
     </div>
     <div class="card-footer text-muted">
       

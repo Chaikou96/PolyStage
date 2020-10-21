@@ -1,7 +1,7 @@
 <h1 class="mt-2">Rechercher un Stage</h1>
 <div class="md-form mt-0"  >
     <input ng-change="allStagesBySearchValue(searchValue)" id="searchBar" ng-model="searchValue" class="form-control" type="text" placeholder="Search" aria-label="Search">
-    <button ng-click="allStagesBySearchValue(searchValue)"  class="btn btn-outline-primary btn-block ">Search</button>
+    <button ng-click="allStagesBySearchValue(searchValue)"  class="btn btn-outline-primary btn-block" ng-disabled="!val"  >Search</button>
     <table class="table">
         <thead>
           <tr>

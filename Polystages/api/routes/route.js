@@ -10,6 +10,7 @@ module.exports = function (app) {
   var QuestionControlleur = require('../controllers/questionController');
   var FormControlleur = require('../controllers/formController');
   var MailControlleur = require('../controllers/mailController')
+  var convertJson  = require('../ConvertJson/convertJsonToCsv')
   
   app.route('/entreprises')
     .get(EntrepriseControlleur.list_all_entreprises)
@@ -100,5 +101,9 @@ module.exports = function (app) {
 
   app.route('/mail/rappel')
     .post(MailControlleur.send_rappels)
+  
+  // route vers le fichier pour la conversion du stage (json to csv )
+  app.route('/convertJsonToCsv')
+    .post(StageControlleur.convertJsonToCsv)
 
 };

@@ -5,12 +5,12 @@ controllers.controller('adminController', function ($scope, $rootScope, retardsF
   }
 
   // une grande partie doit se deplacer dans un nouveau controller rechercherStageController 
-
-
+  
 
   $scope.init = function(item)
   {
     stageItem = item;
+
   };
 
   // recuperer tous les stages
@@ -28,14 +28,22 @@ controllers.controller('adminController', function ($scope, $rootScope, retardsF
 
   // recuperer les stages avec la valeur dans search bar
   $scope.allStagesBySearchValue = function () {
-    var val = document.getElementById("searchBar").value
-    stageFactory.getStagesByVal(val)
+    $scope.val = document.getElementById("searchBar").value
+    if ( !$scope.val)
+      $scope.getAllStages()
+    stageFactory.getStagesByVal($scope.val)
       .then(function (success) {
         $scope.stages = success.data
         $scope.getNomEntreprise($scope.stages)
       }, function (error) {
         //$scope.erreurAuthentification()
       })
+  }
+
+  // fonction pour la conversion du stage ( json to csv )
+  $scope.jsonToCsv = function (data) {
+    console.log('data')
+    stageFactory.convertJsonToCsv(data)
   }
 
   // recuperer un stage avec Id
