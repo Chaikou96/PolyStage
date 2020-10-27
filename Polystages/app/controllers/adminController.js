@@ -41,9 +41,12 @@ controllers.controller('adminController', function ($scope, $rootScope, retardsF
   }
 
   // fonction pour la conversion du stage ( json to csv )
-  $scope.jsonToCsv = function (data) {
-    console.log('data')
-    stageFactory.convertJsonToCsv(data)
+  $scope.oneStageJsonToCsv = function (data) {
+    stageFactory.convertOneStageJsonToCsv(data)
+  }
+
+  $scope.allStagesJsonToCsv = function (data) {
+    stageFactory.convertAllStagesJsonToCsv(data)
   }
 
   // recuperer un stage avec Id

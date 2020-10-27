@@ -102,8 +102,12 @@ module.exports = function (app) {
   app.route('/mail/rappel')
     .post(MailControlleur.send_rappels)
   
-  // route vers le fichier pour la conversion du stage (json to csv )
-  app.route('/convertJsonToCsv')
-    .post(StageControlleur.convertJsonToCsv)
+  // route vers le fichier pour la conversion d'un seul stage (json to csv )
+  app.route('/convertOneStageJsonToCsv')
+    .post(StageControlleur.convertOneStageJsonToCsv)
+  
+  // route vers le fichier pour la conversion de tous les stages (json to csv )
+  app.route('/convertAllStagesJsonToCsv')
+    .post(StageControlleur.convertAllStagesJsonToCsv)
 
 };

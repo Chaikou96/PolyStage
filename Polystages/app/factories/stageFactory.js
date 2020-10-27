@@ -2,11 +2,18 @@ simpleApp.factory('stageFactory', function ($http) {
     return {
 
         // requete http pour la conversion du stage ( json to csv )
-        convertJsonToCsv: function (data) {
-            console.log(data)
+        convertAllStagesJsonToCsv: function (data) {
             return $http({
                 method: 'POST',
-                url: 'http://localhost:8080/convertJsonToCsv',
+                url: 'http://localhost:8080/convertAllStagesJsonToCsv',
+                params : { "data" : data }
+            })
+        },
+
+        convertOneStageJsonToCsv: function (data) {
+            return $http({
+                method: 'POST',
+                url: 'http://localhost:8080/convertOneStageJsonToCsv',
                 params : { "data" : data }
             })
         },
