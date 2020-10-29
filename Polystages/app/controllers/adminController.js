@@ -42,12 +42,24 @@ controllers.controller('adminController', function ($scope, $rootScope, retardsF
 
   // fonction pour la conversion du stage ( json to csv )
   $scope.oneStageJsonToCsv = function (data) {
-    stageFactory.convertOneStageJsonToCsv(data)
+    let rep = stageFactory.convertOneStageJsonToCsv(data)
+    console.log(rep.$$state)
+    notifySucess()
   }
 
   $scope.allStagesJsonToCsv = function (data) {
     stageFactory.convertAllStagesJsonToCsv(data)
+    notifySucess()
   }
+
+  const notifySucess = function () {
+    toastr.success('Les données du stage(s) sont enregistrées dans le fichier stage.csv avec succés');
+  }
+  
+  const notifyFailure = function () {
+    toastr.error('Erreur, Les données du stage(s) ne sont pas enregistrées ');
+  }
+
 
   // recuperer un stage avec Id
   $scope.allStagesInfosById = function () {
