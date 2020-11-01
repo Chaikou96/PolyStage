@@ -1,63 +1,6 @@
 'use strict';
 
 var Stage = require('../models/StageModel.js');
-const converter = require('json-2-csv');
-const fs = require('fs');
-
-
-
-
-
-// conversion json ( stage ) to format csv 
-exports.convertAllStagesJsonToCsv = function (req, res) {
-  let length = req.query.data.length
-  let stages = '['
-  for (let index = 0; index < length; index++) {
-    if( index < length - 1 )
-      stages = stages + req.query.data[index] + ','
-    else 
-      stages = stages + req.query.data[index]
-  }
-  stages = stages + ']'
-  
-  let data = JSON.parse(stages)
-  
-  //console.log(req.query.data)
-    converter.json2csv(data, (err, csv) => {
-        if (err) {
-          res.send(err)
-        }
-    
-        // print CSV string
-        console.log(csv);
-    
-        // write CSV to a file
-        fs.writeFileSync('stages.csv', csv);
-        res.send(data);
-    });
-};
-
-exports.convertOneStageJsonToCsv = function (req, res) {
-  
-  let data = JSON.parse(req.query.data) 
-    converter.json2csv(data, (err, csv) => {
-        if (err) {
-          res.send(err)
-        }
-    
-        // print CSV string
-        console.log(csv);
-    
-        // write CSV to a file
-      fs.writeFileSync('stages.csv', csv);
-      res.send(data);
-    });
-};
-
-
-
-
-
 
 exports.list_all_stages = function (req, res) {
   Stage.getAllStage(function (err, stages) {

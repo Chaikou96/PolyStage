@@ -2,19 +2,55 @@
 const converter = require('json-2-csv');
 const fs = require('fs');
 
-exports.convertJsonToCsv = function (req, res) {
-    let data = req.params.data
-    converter.json2csv(data, (err, csv) => {
-        if (err) {
-           res.send(err)
-        }
+// conversion json ( stage ) to format csv 
+exports.convertAllStagesJsonToCsv = function (req, res) {
+    let length = req.query.data.length
+    let stages = '['
+    for (let index = 0; index < length; index++) {
+      if( index < length - 1 )
+        stages = stages + req.query.data[index] + ','
+      else 
+        stages = stages + req.query.data[index]
+    }
+    stages = stages + ']'
     
-        // print CSV string
-        console.log(csv);
+    let data = JSON.parse(stages)
     
-        // write CSV to a file
+    //console.log(req.query.data)
+      converter.json2csv(data, (err, csv) => {
+          if (err) {
+            res.send(err)
+          }
+      
+          // print CSV string
+          console.log(csv);
+      
+          // write CSV to a file
+          fs.writeFileSync('stages.csv', csv);
+          res.send(data);
+      });
+  };
+  
+  exports.convertOneStageJsonToCsv = function (req, res) {
+    
+    let data = JSON.parse(req.query.data) 
+      converter.json2csv(data, (err, csv) => {
+          if (err) {
+            res.send(err)
+          }
+      
+          // print CSV string
+          console.log(csv);
+      
+          // write CSV to a file
         fs.writeFileSync('stages.csv', csv);
         res.send(data);
-    });
-};
+      });
+  };
+
+  exports.convertStagesCsvToJson = function (req, res) {
+    
+    console.log('ok')
+    res.send()
+  };
   

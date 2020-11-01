@@ -1,10 +1,28 @@
 simpleApp.factory('convertJsonFactory', function ($http) {
     return {
-        convertJsonToCsv: function (data) {
+
+        // requete http pour la conversion du stage ( json to csv )
+        convertAllStagesJsonToCsv: function (data) {
             return $http({
                 method: 'POST',
-                url: 'http://localhost:8080/convertJsonToCsv',
-                params : { 'data' : data }
+                url: 'http://localhost:8080/convertAllStagesJsonToCsv',
+                params : { "data" : data }
+            })
+        },
+
+        convertOneStageJsonToCsv: function (data) {
+            return  $http({
+                method: 'POST',
+                url: 'http://localhost:8080/convertOneStageJsonToCsv',
+                params : { "data" : data }
+            })
+        },
+
+        convertStagesToJson: function (data) {
+            return  $http({
+                method: 'POST',
+                url: 'http://localhost:8080/convertOneStageJsonToCsv',
+                params : { "data" : data }
             })
         }
     }
