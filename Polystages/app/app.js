@@ -31,7 +31,7 @@ simpleApp.config(['$routeProvider',
       }).
       when('/ajouterStage', {
         templateUrl: 'app/views/ajouterStage.html',
-        controller: 'rechercherStageController'
+        controller: 'ajouterStageController'
       }).
       when('/evaluation/stage/:idstage', {
         templateUrl: 'app/views/eval.html',

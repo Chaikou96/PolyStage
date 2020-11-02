@@ -1,6 +1,7 @@
 // require json-2-csv module
 const converter = require('json-2-csv');
 const fs = require('fs');
+const csvToJson = require('convert-csv-to-json')
 
 // conversion json ( stage ) to format csv 
 exports.convertAllStagesJsonToCsv = function (req, res) {
@@ -23,7 +24,7 @@ exports.convertAllStagesJsonToCsv = function (req, res) {
           }
       
           // print CSV string
-          console.log(csv);
+          //console.log(csv);
       
           // write CSV to a file
           fs.writeFileSync('stages.csv', csv);
@@ -40,7 +41,7 @@ exports.convertAllStagesJsonToCsv = function (req, res) {
           }
       
           // print CSV string
-          console.log(csv);
+          //console.log(csv);
       
           // write CSV to a file
         fs.writeFileSync('stages.csv', csv);
@@ -48,9 +49,13 @@ exports.convertAllStagesJsonToCsv = function (req, res) {
       });
   };
 
-  exports.convertStagesCsvToJson = function (req, res) {
-    
-    console.log('ok')
+exports.convertStagesCsvToJson = function (req, res) {
+    console.log(req.query.data)
+    let json = csvToJson.getJsonFromCsv(req.query.data)
+    console.log(json)
+    for(let i=0; i<json.length;i++){
+      console.log(json[i]);
+    }
     res.send()
   };
   

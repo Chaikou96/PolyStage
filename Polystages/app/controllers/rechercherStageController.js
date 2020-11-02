@@ -42,13 +42,21 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
 
   // fonction pour la conversion du stage ( json to csv )
   $scope.oneStageJsonToCsv = function (data) {
-    convertJsonFactory.convertOneStageJsonToCsv(data)
-    notifySucess()
+    convertJsonFactory.convertOneStageJsonToCsv(data).then(success => {
+      notifySucess()
+    }, error => {
+      notifyFailure()
+    })
+    
   }
 
   $scope.allStagesJsonToCsv = function (data) {
-    convertJsonFactory.convertAllStagesJsonToCsv(data)
-    notifySucess()
+    convertJsonFactory.convertAllStagesJsonToCsv(data).then(success => {
+      notifySucess()
+    }, error => {
+      notifyFailure()
+    })
+
   }
 
   const notifySucess = function () {

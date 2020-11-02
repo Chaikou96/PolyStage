@@ -4,17 +4,42 @@
     <div class="card-header">
       <h3> Importer un fichier pour ajouter des stages </h3>
     </div>
-    <div class="card-body">
-      <!-- The `multiple` attribute lets users select multiple files. -->
-        <input  type="file" id="file-selector" multiple>
-        <script>
-        const fileSelector = document.getElementById('file-selector');
-        fileSelector.addEventListener('change', (event) => {
-            const fileList = event.target.files;
-            console.log(fileList);
-        });
-        </script>
-    </div>
+    <form class="md-form" action="#">
+      <div class="file-field big-2">
+        <div class="btn btn-outline-success waves-effect btn-lg float-left">
+          <span>Choose files</span>
+          <input ng-change="convertStageCsvToJson(file)" id="fileInput" ng-model="fileInput" type="file" multiple>
+        </div>
+        <div class="file-path-wrapper">
+          <input  class="file-path validate" type="text" placeholder="Upload one or more files">
+        </div>
+      </div>
+    </form>
+
+    <table class="table" ng-repeat="(key, stage) in stages" >
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Titre du stage</th>
+          <th scope="col">Description du stage</th>
+          <th scope="col">Nom de l'entreprise</th>
+          <th scope="col">Promo</th>
+          <th scope="col">Année</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  >
+          <th scope="row">{{key+1}}</th>
+          <td>{{stage.titrestage}}</td>
+          <td>{{stage.description}}</td>
+          <td>{{stage.nomentreprise}}</td>
+          <td>{{stage.niveau}}</td>
+          <td>{{stage.annee}}</td>
+          <td> <a href="#!/detailsDuStage" > <button ng-click="init(stage)"  class="btn btn-outline-primary ">Détails</button> </a> </td>
+        </tr>
+      </tbody>
+    </table>
 
   </div>
 </div>
