@@ -1,13 +1,13 @@
 const config = {
   app: {
-    port: 8080
+    port: 8888
   },
   db: {
     host: 'localhost',
     port: 3306,
-    database: 'phpmyadmin',
-    user: 'phpmyadmin',
-    password: 'root'
+    database: '',
+    user: '',
+    password: ''
   },
   gmail: {
     user: 'bobocheck2006@gmail.com',
