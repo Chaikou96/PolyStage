@@ -12,6 +12,8 @@
   "dependencies": {
     "carbone": "^1.2.1",
     "convert-csv-to-json": "^1.0.0",
+    "datatables.net": "^1.10.22",
+    "datatables.net-dt": "^1.10.22",
     "express": "^4.17.1",
     "formidable": "^1.2.1",
     "generate-password": "^1.4.2",

@@ -6,6 +6,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
 
   // une grande partie doit se deplacer dans un nouveau controller rechercherStageController 
   
+  
 
   $scope.init = function(item)
   {
@@ -44,8 +45,9 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
   $scope.oneStageJsonToCsv = function (data) {
     convertJsonFactory.convertOneStageJsonToCsv(data).then(success => {
       notifySucess()
+      window.open('http://localhost:8080/downloadFileStagesCSV', '_blank');
     }, error => {
-      notifyFailure()
+        notifyFailure()
     })
     
   }
@@ -53,6 +55,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
   $scope.allStagesJsonToCsv = function (data) {
     convertJsonFactory.convertAllStagesJsonToCsv(data).then(success => {
       notifySucess()
+      window.open('http://localhost:8080/downloadFileStagesCSV', '_blank');
     }, error => {
       notifyFailure()
     })

@@ -1,10 +1,16 @@
+<script type="text/javascript" src='DataTables/media/js/jquery.js'></script>
+
+<script type="text/javascript" src="DataTables/media/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="DataTables/media/css/jquery.dataTables.min.css">
+
+
 <h1 class="mt-2">Rechercher un Stage</h1>
 <div class="md-form mt-0"  >
     <input ng-change="allStagesBySearchValue(searchValue)" id="searchBar" ng-model="searchValue" class="form-control" type="text" placeholder="Search" aria-label="Search">
     <button ng-click="allStagesBySearchValue(searchValue)"  class="btn btn-outline-primary btn-lg" ng-disabled="!val"  >Search</button>
     <button ng-click="allStagesJsonToCsv(stages)"  class="btn btn-success btn-lg float-lg-right">Download CSV</button>
     <button ng-click="getAllStages()"  class="btn btn-primary btn-lg float-lg-right">Afficher tous les stages</button>
-    <table class="table">
+    <table class="display" id="tab">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -28,4 +34,12 @@
           </tr>
         </tbody>
       </table>
+			<script>
+        $(document).ready(function () {
+        $('#tab').DataTable({
+            
+        });
+        });
+      </script>
 </div>
+

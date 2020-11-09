@@ -113,5 +113,8 @@ module.exports = function (app) {
   // route vers le fichier pour la conversion d'un fichier csv (stages) en json
   app.route('/convertStagesCsvToJson')
     .post(ConvertJson.convertStagesCsvToJson)
-
+  
+  // donwload fichier stages.csv
+  app.route('/downloadFileStagesCSV')
+    .get(ConvertJson.downloadStagesCsv)
 };

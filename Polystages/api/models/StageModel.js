@@ -95,7 +95,7 @@ Stage.getStage = function (val, result) {
     if (parseInt(val))
         query = `Select * from stage where ( annee = ${val} ) or ( niveau = "${val}" ) `    
     else 
-        query = `Select * from stage where ( titrestage like '${val}%' ) or ( description like '${val}%' )`
+        query = `Select * from stage inner join entreprise on stage.identreprise = entreprise.identreprise where ( titrestage like '${val}%' ) or ( description like '${val}%' ) or (nomcomplet like '${val}%') `
     
     db.query(query, function (err, res) {
         if (err) {
