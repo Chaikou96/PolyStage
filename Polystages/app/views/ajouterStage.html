@@ -1,6 +1,6 @@
-<h1 class="mt-2">Ajouter des stages</h1>
-<div class="md-form mt-0" >
-  <div class="card text-center">
+<h1 class="d-flex justify-content-center">Ajouter des stages</h1>
+<div class="d-flex justify-content-center" >
+  <div class="card w-75 text-center">
     <div class="card-header">
       <h3> Importer un fichier pour ajouter des stages </h3>
     </div>
@@ -15,31 +15,49 @@
         </div>
       </div>
     </form>
-
-    <table class="table" ng-repeat="(key, stage) in stages" >
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Titre du stage</th>
-          <th scope="col">Description du stage</th>
-          <th scope="col">Nom de l'entreprise</th>
-          <th scope="col">Promo</th>
-          <th scope="col">Année</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr  >
-          <th scope="row">{{key+1}}</th>
-          <td>{{stage.titrestage}}</td>
-          <td>{{stage.description}}</td>
-          <td>{{stage.nomentreprise}}</td>
-          <td>{{stage.niveau}}</td>
-          <td>{{stage.annee}}</td>
-          <td> <a href="#!/detailsDuStage" > <button ng-click="init(stage)"  class="btn btn-outline-primary ">Détails</button> </a> </td>
-        </tr>
-      </tbody>
-    </table>
+    <div ng-if="listStages">
+      <h2>La liste des stages</h2>
+      <p class="text-danger">veuillez vérifier les informations saisies avant de sauvegarder</p>
+      <button ng-click="cancelSave()"  class="btn btn-danger btn-lg float-lg-right">Annuler</button>
+      <button ng-click="saveStages()"  class="btn btn-success btn-lg float-lg-right">Sauvegarder</button>  
+    </div>
+    <div class="card text-center" ng-repeat="stage in listStages">
+      <div class="card-header">
+        <h3> {{stage.titrestage}} </h3>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Nom de l'entreprise</h5>
+        <p class="card-text">{{stage.nomentreprise}}</p>
+  
+        <h5 class="card-title">Nom du stagiaire</h5>
+        <p class="card-text">{{stage.nomEleve}}</p>
+  
+        <h5 class="card-title">Prénom du stagiaire</h5>
+        <p class="card-text">{{stage.prenomEleve}}</p>
+  
+        <h5 class="card-title">Année</h5>
+        <p class="card-text">{{stage.annee}}</p>
+  
+        <h5 class="card-title">Promo</h5>
+        <p class="card-text">{{stage.niveau}}</p>
+  
+        <h5 class="card-title">Date du début</h5>
+        <p class="card-text">{{stage.datedebut}}</p>
+  
+        <h5 class="card-title">Date de la fin </h5>
+        <p class="card-text">{{stage.datefin}}</p>
+  
+        <h5 class="card-title">Description du stage</h5>
+        <p class="card-text">{{stage.description}}</p>
+  
+        <h5 class="card-title" ng-if="stage.adressestage" >Adresse du stage</h5>
+        <p class="card-text">{{stage.adressestage}}</p>
+      
+      </div>
+      <div class="card-footer text-muted">
+        
+      </div>
+    </div>
 
   </div>
 </div>
