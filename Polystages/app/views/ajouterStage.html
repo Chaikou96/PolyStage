@@ -18,7 +18,7 @@
     <div ng-if="listStages">
       <h2>La liste des stages</h2>
       <p class="text-danger">veuillez vérifier les informations saisies avant de sauvegarder</p>
-      <button ng-click="cancelSave()"  class="btn btn-danger btn-lg float-lg-right">Annuler</button>
+      <button type="button" class="btn btn-danger btn-lg float-lg-right" data-toggle="modal" data-target="#exampleModal">Annuler</button>
       <button ng-click="saveStages()"  class="btn btn-success btn-lg float-lg-right">Sauvegarder</button>  
     </div>
     <div class="card text-center" ng-repeat="stage in listStages">
@@ -60,4 +60,26 @@
     </div>
 
   </div>
+  <!-- Confirm modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Vous êtes sur le point d'annuler l'enregistrement des stages dans votre base de données. </p>
+          <p>Etes-vous sûr de vouloir effectuer cette action ? </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Non</button>
+          <button ng-click="cancelSave()" type="button" class="btn btn-danger">Oui</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
