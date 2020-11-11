@@ -22,17 +22,16 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
   });
 
   $scope.saveStages = function () {
-    console.log($scope.listStages)
     $scope.listStages.forEach(element => {
-      stageFactory.createStage($scope.listStages).then(success => {
+      stageFactory.createStageWithCsv(element).then(success => {
         toastr.success("Stages enregistrés avec succés")
       }, error => {
         toastr.error("Une erreur s'est produite")
       })
     });
-    setTimeout(function () {
+    /*setTimeout(function () {
       location.reload()
-    }, 3000)
+    }, 3000)*/
   }
 
   $scope.cancelSave = function () {

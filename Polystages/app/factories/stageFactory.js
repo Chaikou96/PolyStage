@@ -29,6 +29,13 @@ simpleApp.factory('stageFactory', function ($http) {
                 data: data
             })
         },
+        createStageWithCsv: function (data) {
+            return $http({
+                method: 'POST',
+                url: 'http://localhost:8080/forms/eleve/csv',
+                data: data
+            })
+        },
         editStage: function (idstage, data) {
             return $http({
                 method: 'PUT',

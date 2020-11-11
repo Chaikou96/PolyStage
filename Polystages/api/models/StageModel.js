@@ -7,6 +7,7 @@ function formatDateForSQL(date) {
 
 //Task object constructor
 var Stage = function (stage, idtuteur) {
+    console.log('stage')
     this.ideleve = stage.idEleve;
     this.niveau = stage.niveau;
     this.annee = stage.annee;
@@ -19,6 +20,37 @@ var Stage = function (stage, idtuteur) {
     this.description = stage.descriptionstage;
     this.adremailstage = stage.emailstage;
     this.adressestage = stage.adresseentreprise;
+};
+
+//Task object constructor
+Stage.StageCsv = function (stage, idtuteur) {
+    console.log("stageCsv")
+    let stageObj = {
+        'niveau' : stage.niveau,
+        'annee' : stage.annee,
+        'idens': stage.idens,
+        'idtuteur' : stage.idtuteur,
+        'datedebut' : stage.datedebut,
+        'datefin' : stage.datefin,
+        'identreprise' : stage.identreprise,
+        'titrestage' : stage.titrestage,
+        'description' : stage.description,
+        'adremailstage' : stage.adremailstage,
+        'adressestage' : stage.adressestage,
+        'cheminrapport': stage.cheminrapport,
+        'cheminpres': stage.cheminpres,
+        'chemineval': stage.cheminval,
+        //'dateeval': stage.dateeval,
+        //'evallancee': stage.evallancee,
+        'confidentiel': stage.confidentiel,
+        //'datelimiterendu': stage.datelimiterendu,
+        //'datelimiteeval': stage.datalimiteeval,
+        //'datesoutenance': stage.datesoutenance,
+        //'datecomp': stage.datecomp,
+        'chemincomp': stage.chemincomp
+    }
+    console.log(stageObj)
+    return stageObj;
 };
 
 function DateUpdate(stage) {
@@ -192,6 +224,7 @@ Stage.createStage = function (newStage, result) {
                 result(null, 409);
             }
             else {
+                console.log('insert into')
                 db.query("INSERT INTO stage set ?", newStage, function (err, res) {
                     if (err) {
                         console.log("error: ", err);

@@ -2,6 +2,7 @@
 
 var Tuteur = require('../models/TuteurModel.js');
 var Stage = require('../models/StageModel.js');
+var StageCsv = require('../models/StageModel.js');
 var Enseignant = require('../models/EnseignantModel.js')
 var Entreprise = require('../models/EntrepriseModel.js')
 var Mail = require('../models/MailModel.js')
@@ -64,6 +65,37 @@ exports.FormEleve = function (req, res) {
     })
   } else {
     var new_stage = new Stage(req.body, 0);
+    Stage.createStage(new_stage, function (err, result) {
+      if (err) res.status(500).send(err);
+      res.status(result).send();
+    })
+  }
+}
+
+exports.FormEleveCsv = function (req, res) {
+
+  if (req.body.adresseentreprise) {
+    Entreprise.updateEntreprise(req.body, function (res) { })
+  }
+  if (req.body.nomtuteur) {
+    //Verification du tuteur crée si non existe
+    Tuteur.createTuteur(req.body, function (err, result) {
+      if (err)
+        res.status(500).send(err);
+      var idtuteur = result
+      //Crée le stage
+      var new_stage = new Stage(req.body, idtuteur);
+      Stage.createStage(new_stage, function (err, result) {
+        if (err)
+          res.status(500).send(err);
+        if (result && result.length) {
+          res.status(200).send(result);
+        }
+      })
+    })
+  } else {
+    console.log('hello there')
+    var new_stage = Stage.StageCsv(req.body, 0);
     Stage.createStage(new_stage, function (err, result) {
       if (err) res.status(500).send(err);
       res.status(result).send();

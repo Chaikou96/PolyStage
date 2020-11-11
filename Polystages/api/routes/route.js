@@ -95,6 +95,9 @@ module.exports = function (app) {
 
   app.route('/forms/eleve')
     .post(FormControlleur.FormEleve);
+  
+  app.route('/forms/eleve/csv')
+    .post(FormControlleur.FormEleveCsv);
 
   app.route('/mail/evaluation')
     .post(MailControlleur.proced_eval)
