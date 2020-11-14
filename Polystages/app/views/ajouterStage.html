@@ -18,40 +18,31 @@
     <div ng-if="listStages">
       <h2>La liste des stages</h2>
       <p class="text-danger">veuillez vérifier les informations saisies avant de sauvegarder</p>
-      <button type="button" class="btn btn-danger btn-lg float-lg-right" data-toggle="modal" data-target="#exampleModal">Annuler</button>
+      <button  type="button" class="btn btn-danger btn-lg float-lg-right" data-toggle="modal" data-target="#exampleModal">Annuler</button>
       <button ng-click="saveStages()"  class="btn btn-success btn-lg float-lg-right">Sauvegarder</button>  
     </div>
     <div class="card text-center" ng-repeat="stage in listStages">
       <div class="card-header">
-        <h3> {{stage.titrestage}} </h3>
+        <h3> {{stage.Sujetdustage}} </h3>
       </div>
       <div class="card-body">
-        <h5 class="card-title">Nom de l'entreprise</h5>
-        <p class="card-text">{{stage.nomentreprise}}</p>
+        <h5 class="card-title">Etudiant</h5>
+        <p class="card-text">{{stage.Etudiant}}</p>
   
-        <h5 class="card-title">Nom du stagiaire</h5>
-        <p class="card-text">{{stage.nomEleve}}</p>
+        <h5 class="card-title">Raison sociale</h5>
+        <p class="card-text">{{stage.Raisonsociale}}</p>
   
-        <h5 class="card-title">Prénom du stagiaire</h5>
-        <p class="card-text">{{stage.prenomEleve}}</p>
+        <h5 class="card-title">Ville de stage</h5>
+        <p class="card-text">{{stage.VilledeStage}}</p>
   
-        <h5 class="card-title">Année</h5>
-        <p class="card-text">{{stage.annee}}</p>
+        <h5 class="card-title">Pays de Stage</h5>
+        <p class="card-text">{{stage.PaysdeStage}}</p>
   
-        <h5 class="card-title">Promo</h5>
-        <p class="card-text">{{stage.niveau}}</p>
+        <h5 class="card-title">Date de début</h5>
+        <p class="card-text">{{stage.Datededebut}}</p>
   
-        <h5 class="card-title">Date du début</h5>
-        <p class="card-text">{{stage.datedebut}}</p>
-  
-        <h5 class="card-title">Date de la fin </h5>
-        <p class="card-text">{{stage.datefin}}</p>
-  
-        <h5 class="card-title">Description du stage</h5>
-        <p class="card-text">{{stage.description}}</p>
-  
-        <h5 class="card-title" ng-if="stage.adressestage" >Adresse du stage</h5>
-        <p class="card-text">{{stage.adressestage}}</p>
+        <h5 class="card-title">Date de fin</h5>
+        <p class="card-text">{{stage.Datedefin}}</p>
       
       </div>
       <div class="card-footer text-muted">

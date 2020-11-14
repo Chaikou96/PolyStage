@@ -26,28 +26,28 @@ var Stage = function (stage, idtuteur) {
 Stage.StageCsv = function (stage, idtuteur) {
     console.log("stageCsv")
     let stageObj = {
-        'niveau' : stage.niveau,
-        'annee' : stage.annee,
-        'idens': stage.idens,
-        'idtuteur' : stage.idtuteur,
-        'datedebut' : stage.datedebut,
-        'datefin' : stage.datefin,
-        'identreprise' : stage.identreprise,
-        'titrestage' : stage.titrestage,
-        'description' : stage.description,
-        'adremailstage' : stage.adremailstage,
-        'adressestage' : stage.adressestage,
-        'cheminrapport': stage.cheminrapport,
-        'cheminpres': stage.cheminpres,
-        'chemineval': stage.cheminval,
+        //'niveau' : stage.niveau,
+        //'annee' : stage.annee,
+        //'idens': stage.idens,
+        //'idtuteur' : stage.idtuteur,
+        'datedebut' : stage.Datededebut,
+        'datefin': stage.Datedefin,
+        //'identreprise' : stage.identreprise,
+        'titrestage' : stage.Sujetdustage
+        //'description' : stage.description,
+        //'adremailstage' : stage.adremailstage,
+        //'adressestage' : stage.adressestage,
+        //'cheminrapport': stage.cheminrapport,
+        //'cheminpres': stage.cheminpres,
+        //'chemineval': stage.cheminval,
         //'dateeval': stage.dateeval,
         //'evallancee': stage.evallancee,
-        'confidentiel': stage.confidentiel,
+        //'confidentiel': stage.confidentiel,
         //'datelimiterendu': stage.datelimiterendu,
         //'datelimiteeval': stage.datalimiteeval,
         //'datesoutenance': stage.datesoutenance,
         //'datecomp': stage.datecomp,
-        'chemincomp': stage.chemincomp
+        //'chemincomp': stage.chemincomp
     }
     console.log(stageObj)
     return stageObj;
@@ -224,7 +224,9 @@ Stage.createStage = function (newStage, result) {
                 result(null, 409);
             }
             else {
-                console.log('insert into')
+                // formate date to YYYY/MM/DD to set into the database
+                newStage.datedebut = formatDate(newStage.datedebut)
+                newStage.datefin = formatDate(newStage.datedebut)
                 db.query("INSERT INTO stage set ?", newStage, function (err, res) {
                     if (err) {
                         console.log("error: ", err);
@@ -237,6 +239,20 @@ Stage.createStage = function (newStage, result) {
             }
         })
 };
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
 Stage.updateStage = function (idstage, newStage, result) {
     let query = "SELECT * FROM stage WHERE idstage = ?"

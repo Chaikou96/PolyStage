@@ -1,15 +1,15 @@
-<script type="text/javascript" src='DataTables/media/js/jquery.js'></script>
 
-<script type="text/javascript" src="DataTables/media/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="DataTables/media/css/jquery.dataTables.min.css">
+<script src="http://code.jquery.com/jquery-1.7.js"></script>
+<script src="../../flaviusmatis-simplePagination.js-e32c66e/jquery.simplePagination.js"></script>
+<link type="text/css" rel="stylesheet" href="../../flaviusmatis-simplePagination.js-e32c66e/simplePagination.css"/>
 
 <h1 class="mt-2">Rechercher un Stage</h1>
 <div class="md-form mt-0"  >
-    <input ng-change="allStagesBySearchValue(searchValue)" id="searchBar" ng-model="searchValue" class="form-control" type="text" placeholder="Search" aria-label="Search">
+    <input  ng-change="allStagesBySearchValue(searchValue)" id="searchBar" ng-model="searchValue" class="form-control" type="text" placeholder="Search" aria-label="Search">
     <button ng-click="allStagesBySearchValue(searchValue)"  class="btn btn-outline-primary btn-lg" ng-disabled="!val"  >Search</button>
     <button ng-click="allStagesJsonToCsv(stages)"  class="btn btn-success btn-lg float-lg-right">Download CSV</button>
     <button ng-click="getAllStages()"  class="btn btn-primary btn-lg float-lg-right">Afficher tous les stages</button>
-    <table class="display" id="tab">
+    <table class="table" id="dataTable">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -21,24 +21,13 @@
             <th scope="col"></th>
           </tr>
         </thead>
-        <tbody>
-          <tr ng-repeat="(key, stage) in stages" >
-            <th scope="row">{{key+1}}</th>
-            <td>{{stage.titrestage}}</td>
-            <td>{{stage.description}}</td>
-            <td>{{stage.nomentreprise}}</td>
-            <td>{{stage.niveau}}</td>
-            <td>{{stage.annee}}</td>
-            <td> <a href="#!/detailsDuStage" > <button ng-click="init(stage)"  class="btn btn-outline-primary ">Détails</button> </a> </td>
-          </tr>
+        <tbody id="table-body">
+
         </tbody>
       </table>
-			<script>
-        $(document).ready(function () {
-        $('#tab').DataTable({
-            
-        });
-        });
-      </script>
+      
+      <div class="container" >
+        <div id="pagination-wrapper"></div>
+      </div>
 </div>
 

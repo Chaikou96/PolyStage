@@ -12,11 +12,10 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
     const fileList = event.target.files;
     
     convertJsonFactory.convertStagesToJson(fileList[0].name).then(success => {
-      
       $scope.listStages = success.data
-      toastr.success("Informations récupèréés avec succés")
+      notifySucess('Les stages sont récupérés avec succés ')
     }, error => {
-      toastr.error("Une erreur s'est produite") 
+      notifyFailure('Les stages ne sont pas récupérés suite à un problème ')
     })
 
   });
@@ -24,9 +23,9 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
   $scope.saveStages = function () {
     $scope.listStages.forEach(element => {
       stageFactory.createStageWithCsv(element).then(success => {
-        toastr.success("Stages enregistrés avec succés")
+        notifySucess('Les stages sont enregistrés avec succés')
       }, error => {
-        toastr.error("Une erreur s'est produite")
+        notifyFailure('Erreur, Les données du stage(s) ne sont pas enregistrées' )
       })
     });
     /*setTimeout(function () {
@@ -34,10 +33,19 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
     }, 3000)*/
   }
 
-  $scope.cancelSave = function () {
-    location.reload()
+  const notifySucess = function (msg) {
+    alertify.set('notifier','position', 'bottom-left');
+    alertify.success(msg);
+  }
+  
+  const notifyFailure = function (msg) {
+    alertify.set('notifier','position', 'bottom-left');
+    alertify.error(msg);
   }
 
-  
+  $scope.cancelSave = function () {
+    location.reload()
+  }  
+
   $scope.checkIsAdmin()
 })
