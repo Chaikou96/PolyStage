@@ -4,14 +4,24 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
       $location.path("/404")
   }
 
-  // une grande partie doit se deplacer dans un nouveau controller rechercherStageController 
-  
-  var state = {
+  let state = {
     'querySet': '',
     'page': 1,
-    'rows': 7,
+    'rows': 10,
     'window': 10,
 }
+  
+  var selectElem = document.getElementById('selectorNbStages');
+
+  // Quand une nouvelle <option> est selectionnée
+  selectElem.addEventListener('change', function() {
+    var value = selectElem.options[selectElem.selectedIndex].value;
+    // set state number rows
+    state.rows = value
+    setPagination()
+  })
+  
+  
   
 
   $scope.init = function(item)
@@ -125,8 +135,16 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
   }
 
 
+  $scope.setNbStagePerPage = function (selectedNb) {
+    console.log(selectedNb)
+    let index = selectedNb.selectedIndex
+    let nbStagePerPage = selectedNb.options[index].value
+    console.log(nbStagePerPage)
+}
   
-const setPagination = function() {
+const setPagination = function () {
+  
+  
     buildTable()
 
     function pagination(querySet, page, rows) {
