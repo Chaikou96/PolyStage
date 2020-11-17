@@ -1,4 +1,4 @@
-controllers.controller('rechercherStageController', function ($scope,$rootScope, stageFactory,userFactory,convertJsonFactory, entreprisesFactory, $location) {
+controllers.controller('rechercherStageController', function ($scope,$rootScope, stageFactory,userFactory,convertJsonFactory, entreprisesFactory, toolsFactory, $location) {
   $scope.checkIsAdmin = function () {
     if ($rootScope.admin != 1)
       $location.path("/404")
@@ -11,19 +11,17 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     'window': 10,
 }
   
-  var selectElem = document.getElementById('selectorNbStages');
+   var selectElem = document.getElementById('selectorNbStages');
 
   // Quand une nouvelle <option> est selectionnée
   selectElem.addEventListener('change', function() {
     var value = selectElem.options[selectElem.selectedIndex].value;
     // set state number rows
     state.rows = value
-    setPagination()
-  })
+    toolsFactory.setPagination(state,$scope.init)
+  }) 
   
   
-  
-
   $scope.init = function(item)
   {
     stageItem = item;
@@ -42,8 +40,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
         $scope.stages = success.data
         $scope.getNomEntreprise($scope.stages)
         state.querySet = $scope.stages
-        console.log(state.querySet)
-        setPagination()
+        toolsFactory.setPagination(state,$scope.init)
       }, function (error) {
         //$scope.erreurAuthentification()
       })
@@ -54,7 +51,6 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
   // recuperer les stages avec la valeur dans search bar
   $scope.allStagesBySearchValue = function (searchValue) {
     $scope.val = document.getElementById("searchBar").value
-    console.log(searchValue)
     if (!searchValue)
       $scope.getAllStages()
     stageFactory.getStagesByVal(searchValue)
@@ -62,7 +58,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
         $scope.stages = success.data
         $scope.getNomEntreprise($scope.stages)
         state.querySet = $scope.stages
-        setPagination()
+        toolsFactory.setPagination(state,$scope.init)
       }, function (error) {
         //$scope.erreurAuthentification()
       })
@@ -71,32 +67,22 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
   // fonction pour la conversion du stage ( json to csv )
   $scope.oneStageJsonToCsv = function (data) {
     convertJsonFactory.convertOneStageJsonToCsv(data).then(success => {
-      notifySucess()
+      toolsFactory.notifySucess('Fichier téléchargé avec succés')
       window.open('http://localhost:8080/downloadFileStagesCSV', '_blank');
     }, error => {
-      notifyFailure()
+      toolsFactory.notifyFailure('Une erreur s\'est produite, le fichier n\'est pas téléchrgé')
     })
     
   }
 
   $scope.allStagesJsonToCsv = function (data) {
     convertJsonFactory.convertAllStagesJsonToCsv(data).then(success => {
-      notifySucess()
+      toolsFactory.notifySucess('Fichier téléchargé avec succés')
       window.open('http://localhost:8080/downloadFileStagesCSV', '_blank');
     }, error => {
-      notifyFailure()
+      toolsFactory.notifyFailure('Une erreur s\'est produite, le fichier n\'est pas téléchrger')
     })
 
-  }
-
-  const notifySucess = function () {
-    alertify.set('notifier','position', 'bottom-left');
-    alertify.success('Fichier téléchargé avec succés');
-  }
-  
-  const notifyFailure = function () {
-    alertify.set('notifier','position', 'bottom-left');
-    alertify.error('Nous ne pouvons pas télécharger le fichier suite à un problème ');
   }
 
   // recuperer un stage avec Id
@@ -141,104 +127,6 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     let nbStagePerPage = selectedNb.options[index].value
     console.log(nbStagePerPage)
 }
-  
-const setPagination = function () {
-  
-  
-    buildTable()
-
-    function pagination(querySet, page, rows) {
-    
-      var trimStart = (page - 1) * rows
-      var trimEnd = trimStart + rows
-    
-      var trimmedData = querySet.slice(trimStart, trimEnd)
-    
-      var pages = Math.round(querySet.length / rows);
-    
-      return {
-          'querySet': trimmedData,
-          'pages': pages,
-      }
-    }
-    
-    function pageButtons(pages) {
-        var wrapper = document.getElementById('pagination-wrapper')
-    
-        wrapper.innerHTML = ``
-        console.log('Pages:', pages)
-    
-        var maxLeft = (state.page - Math.floor(state.window / 2))
-        var maxRight = (state.page + Math.floor(state.window / 2))
-    
-        if (maxLeft < 1) {
-            maxLeft = 1
-            maxRight = state.window
-        }
-    
-        if (maxRight > pages) {
-            maxLeft = pages - (state.window - 1)
-            
-            if (maxLeft < 1){
-              maxLeft = 1
-            }
-            maxRight = pages
-        }
-    
-    
-    
-        for (var page = maxLeft; page <= maxRight; page++) {
-          wrapper.innerHTML += `<button value=${page} class="page btn btn-sm btn-info">${page}</button>`
-        }
-    
-        if (state.page != 1) {
-            wrapper.innerHTML = `<button value=${1} class="page btn btn-sm btn-info">&#171; First</button>` + wrapper.innerHTML
-        }
-    
-        if (state.page != pages) {
-            wrapper.innerHTML += `<button value=${pages} class="page btn btn-sm btn-info">Last &#187;</button>`
-        }
-    
-        $('.page').on('click', function() {
-            $('#table-body').empty()
-    
-            state.page = Number($(this).val())
-    
-            buildTable()
-        })
-    
-    }
-    
-    
-    function buildTable() {
-      var table = $('#table-body')
-
-      $('#table-body').empty()
-
-      var data = pagination(state.querySet, state.page, state.rows)
-      var myList = data.querySet
-    
-      for (var i = 1 in myList) {
-          //Keep in mind we are using "Template Litterals to create rows"
-        var row = ` <tr>
-                      <th scope="row">${i}</th>
-                      <td>${myList[i].titrestage}</td>
-                      <td>${myList[i].description}</td>
-                      <td>${myList[i].nomentreprise}</td>
-                      <td>${myList[i].niveau}</td>
-                      <td>${myList[i].annee}</td>
-                      <td> <a href="#!/detailsDuStage" > <button ng-click="${$scope.init(myList[i])}"  class="btn btn-outline-primary ">Détails</button> </a> </td>
-                    </tr>`
-          table.append(row)
-      }
-    
-      pageButtons(data.pages)
-      delete myList
-    }
-} 
-
-
-  // une grande partie doit se deplacer dans un nouveau controller rechercherStageController 
-
+ 
   $scope.checkIsAdmin()
 })
