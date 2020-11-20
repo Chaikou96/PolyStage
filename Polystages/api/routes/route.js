@@ -10,11 +10,15 @@ module.exports = function (app) {
   var QuestionControlleur = require('../controllers/questionController');
   var FormControlleur = require('../controllers/formController');
   var MailControlleur = require('../controllers/mailController')
-
+  var ConvertJson  = require('../ConvertJson/convertJsonToCsv')
+  
   app.route('/entreprises')
     .get(EntrepriseControlleur.list_all_entreprises)
     .post(EntrepriseControlleur.create_entreprise);
-
+  
+  app.route('/entreprises/ById/:identreprise')
+    .get(EntrepriseControlleur.get_entreprise_name_by_id)
+  
   app.route('/enseignants')
     .get(EnseignantControlleur.list_all_enseignants);
 
@@ -36,12 +40,22 @@ module.exports = function (app) {
   app.route('/stages')
     .get(StageControlleur.list_all_stages);
 
+//MMM
+  app.route('/stages/statistique')
+    .get(StageControlleur.list_stage_byAnne);
+  
   app.route('/stages/update')
     .get(MailControlleur.verif_dates_stage);
 
   app.route('/stages/:idstage')
     .get(StageControlleur.list_stage_byId)
     .put(FormControlleur.update_stage_byId);
+  
+  app.route('/stages/byIdEleve/:ideleve')
+    .get(StageControlleur.list_stage_byeleveId);
+  
+  app.route('/stages/byVal/:val')
+    .get(StageControlleur.list_stage_byVal);
 
   app.route('/stages/eval/:idstage')
     .get(StageControlleur.list_stage_byIdForEval)
@@ -91,5 +105,17 @@ module.exports = function (app) {
 
   app.route('/mail/rappel')
     .post(MailControlleur.send_rappels)
+  
+  // route vers le fichier pour la conversion d'un seul stage (json to csv )
+  app.route('/convertOneStageJsonToCsv')
+    .post(ConvertJson.convertOneStageJsonToCsv)
+  
+  // route vers le fichier pour la conversion de tous les stages (json to csv )
+  app.route('/convertAllStagesJsonToCsv')
+    .post(ConvertJson.convertAllStagesJsonToCsv)
+  
+  // route vers le fichier pour la conversion d'un fichier csv (stages) en json
+  app.route('/convertStagesCsvToJson')
+    .post(ConvertJson.convertStagesCsvToJson)
 
 };

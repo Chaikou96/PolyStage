@@ -58,6 +58,20 @@ Stage.getStageById = function (idstage, result) {
     });
 }
 
+//MMM
+Stage.getStageByAnnee = function (result) {
+    var query = "SELECT annee FROM stage"
+    db.query(query, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else {
+            result(null, res);
+        }
+    });
+}
+
 Stage.getStageByIdForEval = function (idstage, result) {
     var query = "Select * from stage natural join eleves left join entreprise on entreprise.identreprise = stage.identreprise where idstage = ?"
     db.query(query, idstage, function (err, res) {
@@ -80,6 +94,24 @@ Stage.getStageByEleveId = function (ideleve, result) {
         for (i in res) {
             res[i] = DateUpdate(res[i])
         }
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else {
+            result(null, res);
+        }
+    });
+}
+
+Stage.getStage = function (val, result) {
+    let query
+    if (parseInt(val))
+        query = `Select * from stage where ( annee = ${val} ) or ( niveau = "${val}" ) `    
+    else 
+        query = `Select * from stage where ( titrestage like '${val}%' ) or ( description like '${val}%' )`
+    
+    db.query(query, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);

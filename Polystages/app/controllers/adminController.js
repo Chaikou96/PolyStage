@@ -1,4 +1,4 @@
-controllers.controller('adminController', function ($scope, $rootScope, retardsFactory, mailsFactory, $location, $timeout) {
+controllers.controller('adminController', function ($scope, $rootScope, retardsFactory, mailsFactory, stageFactory, userFactory, entreprisesFactory, $location, $timeout) {
   $scope.checkIsAdmin = function () {
     if ($rootScope.admin != 1)
       $location.path("/404")

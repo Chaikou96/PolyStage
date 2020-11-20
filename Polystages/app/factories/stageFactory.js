@@ -1,5 +1,27 @@
 simpleApp.factory('stageFactory', function ($http) {
     return {
+
+        getAllStages: function (id) {
+           return $http({
+                method: 'GET',
+                url: 'http://localhost:8080/stages'
+            })
+        },
+        getStagesByIdEleve: function (id) {
+            return $http({
+                 method: 'GET',
+                 url: 'http://localhost:8080/stages/byIdEleve/' + id ,
+                 params : { "eleveId" : id }
+             })
+        },
+        // Fonction pour recuperer les stages avec ( année, promo, nom entreprise, description )
+        getStagesByVal: function (val) {
+            return $http({
+                 method: 'GET',
+                 url: 'http://localhost:8080/stages/byVal/' + val,
+                 params : { "val" : val }
+             })
+         },
         createStage: function (data) {
             return $http({
                 method: 'POST',
@@ -56,7 +78,8 @@ simpleApp.factory('stageFactory', function ($http) {
         getStageById: function (idStage) {
             return $http({
                 method: 'GET',
-                url: 'http://localhost:8080/stages/' + idStage
+                url: 'http://localhost:8080/stages/' + idStage,
+                params : { 'idstage' : idStage }
             })
         },
         getStageByIdForEval: function (idStage) {

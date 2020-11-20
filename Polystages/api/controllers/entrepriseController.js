@@ -10,6 +10,14 @@ exports.list_all_entreprises = function (req, res) {
   });
 };
 
+exports.get_entreprise_name_by_id = function (req, res) {
+  Entreprise.getEntrepriseById(req.params.identreprise, function (err, entreprises) {
+    if (err)
+      res.send(err);
+    res.send(entreprises);
+  });
+};
+
 exports.create_entreprise = function (req, res) {
   Entreprise.createEntreprise(req.body, function (err, entreprise) {
     if (err)

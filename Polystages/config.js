@@ -1,16 +1,16 @@
 const config = {
   app: {
-    port: 8888
+    port: 8080
   },
   db: {
     host: 'localhost',
-    port: 3306,
-    database: '',
-    user: '',
-    password: ''
+    port: 8889,
+    database: 'polystage',
+    user: 'root',
+    password: 'root'
   },
   gmail: {
-    user: 'bobocheck2006@gmail.com',
+    user: 'aymendamak2@gmail.com',
     mdp: '...'
   }
 };
