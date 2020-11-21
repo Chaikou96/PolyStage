@@ -1,1 +1,2 @@
 chaikou mac
+SELECT annee, COUNT(annee) as nbre_stage FROM stage GROUP BY annee
