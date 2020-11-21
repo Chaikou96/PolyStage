@@ -41,7 +41,7 @@ module.exports = function (app) {
     .get(StageControlleur.list_all_stages);
 
 //MMM
-  app.route('/stages/statistique')
+  app.route('/statistique')
     .get(StageControlleur.list_stage_byAnne);
   
   app.route('/stages/update')
