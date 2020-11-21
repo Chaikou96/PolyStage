@@ -76,7 +76,7 @@ exports.list_stage_byId = function (req, res) {
 }
 
 //MMM
-exports.list_stage_byAnne = function (res) {
+exports.list_stage_byAnne = function (req, res) {
   Stage.getStageByAnnee(function (err, stage) {
     if (err)
       res.send(err);
