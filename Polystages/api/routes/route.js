@@ -47,6 +47,9 @@ module.exports = function (app) {
     .get(StageControlleur.list_stage_byId)
     .put(FormControlleur.update_stage_byId);
   
+  app.route('/stagesInfosById/:idstage')
+    .get(StageControlleur.list_stage_InfosbyId)
+  
   app.route('/stages/byIdEleve/:ideleve')
     .get(StageControlleur.list_stage_byeleveId);
   

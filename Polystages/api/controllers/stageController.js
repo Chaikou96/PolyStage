@@ -75,6 +75,13 @@ exports.list_stage_byId = function (req, res) {
   })
 }
 
+exports.list_stage_InfosbyId = function (req, res) {
+  Stage.getStageInfosById(req.params.idstage, function (err, stage) {
+    if (err)
+      res.send(err);
+    res.send(stage);
+  })
+}
 
 exports.list_stage_byIdForEval = function (req, res) {
   Stage.getStageByIdForEval(req.params.idstage, function (err, stage) {

@@ -3,36 +3,80 @@ const converter = require('json-2-csv');
 const fs = require('fs');
 const csvToJson = require('convert-csv-to-json');
 const csv = require('csvtojson');
+const stageModels = require('../models/StageModel')
+const request = require('request-promise');
+const { success } = require('toastr');
+const { info } = require('console');
+const requests = require('request')
+
 
 // conversion json ( stage ) to format csv 
 exports.convertAllStagesJsonToCsv = function (req, res) {
-    let length = req.query.data.length
-    let stages = '['
-    for (let index = 0; index < length; index++) {
-      if( index < length - 1 )
-        stages = stages + req.query.data[index] + ','
-      else 
-        stages = stages + req.query.data[index]
-    }
-    stages = stages + ']'
-    
-    let data = JSON.parse(stages)
-    
-    //console.log(req.query.data)
+  let length = req.query.data.length
+  let tabStageId = req.query.data
+  let stagesInfo = []
+  let stages = ''
+
+  
+  //let stagesData = helloFunction(tabStageId, stages)
+
+  tabStageId.forEach(element => {
+    request('http://localhost:8080/stagesInfosById/' + element, function (error, response, body) {
+    }).then(success => {
+      success = success.replace(']', '')
+      success = success.replace('[', ',')
+      stages = stages + success
+      
+      if (element === tabStageId[tabStageId.length - 1]) {
+      stages = stages.replace(',' ,'[')
+      stages = stages + ']'
+      //console.log(stages)
+      let data = JSON.parse(stages)
       converter.json2csv(data, (err, csv) => {
-          if (err) {
-            res.send(err)
-          }
-      
-          // print CSV string
-          console.log(csv);
-      
-          // write CSV to a file
+        if (err) {
+          res.send(err)
+        }
+    
+        // print CSV string
+        //console.log(csv);
+    
+        // write CSV to a file
         fs.writeFileSync('stages.csv', csv);
         res.send(data);
       });
-  };
+    }
+      
+  })
+  })
+};
+
+function helloFunction(tabStageId, stages) {
+  let data;
+  let infos;
+  let infoStages = '';
+    tabStageId.forEach(element => {
+      request('http://localhost:8080/stagesInfosById/' + element)
+        .then((success) => {
+          success = success + ','
+          stages = success.replace('[', '')
+          stages = stages.replace(']','')
+      })
+      .catch(err => {    
+      })
+        .then(() => {
+          stages = stages.replace(stages.length - 1, ']')
+          console.log(stages)
+          infoStages = infoStages + stages
+          
+          //infoStages = infoStages.replace(infoStages.length - 1, ']')
+          //console.log(infoStages)
+      })
+    })
+}
   
+async function getStageInfosWithId (stageId) {
+  return stageModels.getStageInfosById(stageId);
+  }
   exports.convertOneStageJsonToCsv = function (req, res) {
     let data = JSON.parse(req.query.data) 
       converter.json2csv(data, (err, csv) => {
@@ -55,3 +99,7 @@ exports.convertStagesCsvToJson = function (req, res) {
 exports.downloadStagesCsv = function (req, res) {
   res.download('stages.csv')
 }
+
+
+
+

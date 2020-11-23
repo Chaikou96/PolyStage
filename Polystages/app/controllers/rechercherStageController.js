@@ -11,7 +11,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     'window': 10,
 }
   
-   var selectElem = document.getElementById('selectorNbStages');
+  /* var selectElem = document.getElementById('selectorNbStages');
 
   // Quand une nouvelle <option> est selectionnée
   selectElem.addEventListener('change', function() {
@@ -19,7 +19,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     // set state number rows
     state.rows = value
     toolsFactory.setPagination(state,$scope.init)
-  }) 
+  }) */
   
   
   $scope.init = function(item)
@@ -72,17 +72,22 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     }, error => {
       toolsFactory.notifyFailure('Une erreur s\'est produite, le fichier n\'est pas téléchrgé')
     })
-    
   }
 
   $scope.allStagesJsonToCsv = function (data) {
-    convertJsonFactory.convertAllStagesJsonToCsv(data).then(success => {
+    let allStageId = getAllStagesId(data)
+    convertJsonFactory.convertAllStagesJsonToCsv(allStageId).then(success => {
       toolsFactory.notifySucess('Fichier téléchargé avec succés')
       window.open('http://localhost:8080/downloadFileStagesCSV', '_blank');
     }, error => {
       toolsFactory.notifyFailure('Une erreur s\'est produite, le fichier n\'est pas téléchrger')
     })
+  }
 
+  const getAllStagesId = function (data) {
+    let allIdStages = [];
+    data.forEach(element => allIdStages.push(element.idstage))
+    return allIdStages
   }
 
   // recuperer un stage avec Id

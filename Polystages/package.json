@@ -28,6 +28,9 @@
     "nodemailer": "^6.4.2",
     "nodemon": "^2.0.5",
     "paginationjs": "^2.1.5",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.6",
+    "then-request": "^6.0.2",
     "toastr": "^2.1.4",
     "unirest": "^0.6.0"
   }

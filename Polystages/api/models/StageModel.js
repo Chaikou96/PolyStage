@@ -88,6 +88,20 @@ Stage.getStageById = function (idstage, result) {
             result(null, res);
         }
     });
+}   
+
+// get all stage info by id 
+Stage.getStageInfosById = function (idstage, result) {
+    var query = "Select * from stage where idstage = ?"
+    db.query(query, idstage, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else {
+            result(null, res);
+        }
+    });
 }
 
 Stage.getStageByIdForEval = function (idstage, result) {
