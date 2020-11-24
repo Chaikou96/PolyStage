@@ -8,71 +8,155 @@
       <div class="file-field big-2">
         <div class="btn btn-outline-success waves-effect btn-lg float-left">
           <span>Choose files</span>
-          <input ng-change="convertStageCsvToJson(file)" id="fileInput" ng-model="fileInput" type="file" multiple>
+          <input ng-change="" id="fileInput" ng-model="fileInput" type="file" multiple>
         </div>
         <div class="file-path-wrapper">
           <input  class="file-path validate" type="text" placeholder="Upload one or more files">
         </div>
       </div>
     </form>
-    <div ng-if="listStages">
-      <h2>La liste des stages</h2>
-      <p class="text-danger">veuillez vérifier les informations saisies avant de sauvegarder</p>
-      <button  type="button" class="btn btn-danger btn-lg float-lg-right" data-toggle="modal" data-target="#exampleModal">Annuler</button>
-      <button ng-click="saveStages()"  class="btn btn-success btn-lg float-lg-right">Sauvegarder</button>  
-    </div>
-    <div class="card text-center" ng-repeat="stage in listStages">
-      <div class="card-header">
-        <h3> {{stage.Sujetdustage}} </h3>
-      </div>
+  </div>
+</div>
+<br>
+
+<div ng-if="!listStages" >
+  <div class="d-flex justify-content-center" >
+    <div class="card w-75 text-center">
       <div class="card-body">
-        <h5 class="card-title">Etudiant</h5>
-        <p class="card-text">{{stage.Etudiant}}</p>
-  
-        <h5 class="card-title">Raison sociale</h5>
-        <p class="card-text">{{stage.Raisonsociale}}</p>
-  
-        <h5 class="card-title">Ville de stage</h5>
-        <p class="card-text">{{stage.VilledeStage}}</p>
-  
-        <h5 class="card-title">Pays de Stage</h5>
-        <p class="card-text">{{stage.PaysdeStage}}</p>
-  
-        <h5 class="card-title">Date de début</h5>
-        <p class="card-text">{{stage.Datededebut}}</p>
-  
-        <h5 class="card-title">Date de fin</h5>
-        <p class="card-text">{{stage.Datedefin}}</p>
-      
-      </div>
-      <div class="card-footer text-muted">
+        <h2>Configurer la saisie des données</h2>
+        <p class="text-danger">veuillez vérifier les informations saisies avant de sauvegarder</p>
+
+        <div class="d-flex flex-wrap float-left w-50" >
+          <label>Titre du stage</label>
+          <select class="browser-default custom-select">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <label>Nom de l'entreprise</label>
+          <select class="browser-default custom-select">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <label>Nom de l'étudiant</label>
+          <select class="browser-default custom-select">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+
+          <label>Prénom de l'étudiant</label>
+          <select class="browser-default custom-select">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+
+        <div class="d-flex flex-wrap float-right  w-50" >
+          <label>Promo</label>
+          <select class="browser-default custom-select">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <label>Date de début du stage</label>
+          <select class="browser-default custom-select">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <label>Date de fin de stage</label>
+          <select class="browser-default custom-select">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+
+          <label>Tuteur</label>
+          <select class="browser-default custom-select">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
         
-      </div>
-    </div>
-    
-
-  </div>
-  <!-- Confirm modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Vous êtes sur le point d'annuler l'enregistrement des stages dans votre base de données. </p>
-          <p>Etes-vous sûr de vouloir effectuer cette action ? </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Non</button>
-          <button ng-click="cancelSave()" type="button" class="btn btn-danger">Oui</button>
-        </div>
+        <button  type="button" class="btn btn-danger btn-lg float-lg-right" data-toggle="modal" data-target="#exampleModal">Annuler</button>
+        <button ng-click="loadStagesFromCsv()"  class="btn btn-success btn-lg float-lg-right">OK</button>  
       </div>
     </div>
   </div>
+</div>
+
+<br>
+
+<div ng-if="listStages">
+  <div class="d-flex justify-content-center" >
+    <div class="card w-75 text-center">
+      <div class="card-body">
+        <h2>La liste des stages</h2>
+        <p class="text-danger">veuillez vérifier les informations saisies avant de sauvegarder</p>
+        <button  type="button" class="btn btn-danger btn-lg float-lg-right" data-toggle="modal" data-target="#exampleModal">Annuler</button>
+        <button ng-click="saveStages()"  class="btn btn-success btn-lg float-lg-right">Sauvegarder</button>  
+      </div>
+      <div class="card border-dark text-center" ng-repeat="stage in listStages">
+        <div class="card-header bg-transparent">
+          <h3> {{stage.Sujetdustage}} </h3>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Etudiant</h5>
+          <p class="card-text">{{stage.Etudiant}}</p>
+      
+          <h5 class="card-title">Raison sociale</h5>
+          <p class="card-text">{{stage.Raisonsociale}}</p>
+      
+          <h5 class="card-title">Ville de stage</h5>
+          <p class="card-text">{{stage.VilledeStage}}</p>
+      
+          <h5 class="card-title">Pays de Stage</h5>
+          <p class="card-text">{{stage.PaysdeStage}}</p>
+      
+          <h5 class="card-title">Date de début</h5>
+          <p class="card-text">{{stage.Datededebut}}</p>
+      
+          <h5 class="card-title">Date de fin</h5>
+          <p class="card-text">{{stage.Datedefin}}</p>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
+
+<!-- Confirm modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Attention</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Vous êtes sur le point d'annuler l'enregistrement des stages dans votre base de données. </p>
+        <p>Etes-vous sûr de vouloir effectuer cette action ? </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Non</button>
+        <button ng-click="cancelSave()" type="button" class="btn btn-danger">Oui</button>
+      </div>
+    </div>
+  </div>
 </div>

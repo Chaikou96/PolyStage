@@ -6,19 +6,25 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
 
   $scope.listStages
   // une grande partie doit se deplacer dans un nouveau controller rechercherStageController 
-  
+  let fileList;
   const fileSelector = document.getElementById('fileInput');
   fileSelector.addEventListener('change', (event) => {
-    const fileList = event.target.files;
+     fileList = event.target.files;
+  });
     
+  
+  $scope.loadStagesFromCsv = function () {
+      
     convertJsonFactory.convertStagesToJson(fileList[0].name).then(success => {
-      $scope.listStages = success.data
+        $scope.listStages = success.data
       toolsFactory.notifySucess('Les stages sont récupérés avec succés ')
     }, error => {
-      toolsFactory.notifyFailure('Les stages ne sont pas récupérés suite à un problème ')
+        toolsFactory.notifyFailure('Les stages ne sont pas récupérés suite à un problème ')
     })
-
-  });
+    
+    
+  }
+    
 
   $scope.saveStages = function () {
     $scope.listStages.forEach(element => {
