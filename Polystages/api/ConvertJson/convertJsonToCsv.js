@@ -50,33 +50,6 @@ exports.convertAllStagesJsonToCsv = function (req, res) {
   })
 };
 
-function helloFunction(tabStageId, stages) {
-  let data;
-  let infos;
-  let infoStages = '';
-    tabStageId.forEach(element => {
-      request('http://localhost:8080/stagesInfosById/' + element)
-        .then((success) => {
-          success = success + ','
-          stages = success.replace('[', '')
-          stages = stages.replace(']','')
-      })
-      .catch(err => {    
-      })
-        .then(() => {
-          stages = stages.replace(stages.length - 1, ']')
-          console.log(stages)
-          infoStages = infoStages + stages
-          
-          //infoStages = infoStages.replace(infoStages.length - 1, ']')
-          //console.log(infoStages)
-      })
-    })
-}
-  
-async function getStageInfosWithId (stageId) {
-  return stageModels.getStageInfosById(stageId);
-  }
   exports.convertOneStageJsonToCsv = function (req, res) {
     let data = JSON.parse(req.query.data) 
       converter.json2csv(data, (err, csv) => {
@@ -88,7 +61,7 @@ async function getStageInfosWithId (stageId) {
         fs.writeFileSync('stages.csv', csv);
         res.send(data);
       });
-  };
+};
 
 exports.convertStagesCsvToJson = function (req, res) { 
   let json = csvToJson.getJsonFromCsv(req.query.data);

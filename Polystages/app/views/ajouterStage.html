@@ -28,21 +28,21 @@
 
         <div class="d-flex flex-wrap float-left w-50" >
           <label>Titre du stage</label>
-          <select class="browser-default custom-select">
+          <select class="browser-default custom-select" id="titreDuStage" >
             <option selected>Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
           </select>
           <label>Nom de l'entreprise</label>
-          <select class="browser-default custom-select">
+          <select class="browser-default custom-select" id="nomEntreprise">
             <option selected>Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
           </select>
           <label>Nom de l'étudiant</label>
-          <select class="browser-default custom-select">
+          <select class="browser-default custom-select" id="nomEtudiant">
             <option selected>Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -50,7 +50,7 @@
           </select>
 
           <label>Prénom de l'étudiant</label>
-          <select class="browser-default custom-select">
+          <select class="browser-default custom-select" id="prenomEtudiant" >
             <option selected>Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -60,21 +60,21 @@
 
         <div class="d-flex flex-wrap float-right  w-50" >
           <label>Promo</label>
-          <select class="browser-default custom-select">
+          <select class="browser-default custom-select" id="promo">
             <option selected>Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
           </select>
           <label>Date de début du stage</label>
-          <select class="browser-default custom-select">
+          <select class="browser-default custom-select" id="dateDebut">
             <option selected>Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
           </select>
           <label>Date de fin de stage</label>
-          <select class="browser-default custom-select">
+          <select class="browser-default custom-select" id="dateFin">
             <option selected>Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -82,7 +82,7 @@
           </select>
 
           <label>Tuteur</label>
-          <select class="browser-default custom-select">
+          <select class="browser-default custom-select" id="tuteur" >
             <option selected>Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -108,6 +108,7 @@
         <button  type="button" class="btn btn-danger btn-lg float-lg-right" data-toggle="modal" data-target="#exampleModal">Annuler</button>
         <button ng-click="saveStages()"  class="btn btn-success btn-lg float-lg-right">Sauvegarder</button>  
       </div>
+      <h3> {{etudiant}} </h3>
       <div class="card border-dark text-center" ng-repeat="stage in listStages">
         <div class="card-header bg-transparent">
           <h3> {{stage.Sujetdustage}} </h3>

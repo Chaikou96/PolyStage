@@ -4,7 +4,8 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
       $location.path("/404")
   }
 
-  $scope.listStages
+  $scope.listStages 
+  $scope.etudiant = "Etudiant"
   // une grande partie doit se deplacer dans un nouveau controller rechercherStageController 
   let fileList;
   const fileSelector = document.getElementById('fileInput');
@@ -14,9 +15,12 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
     
   
   $scope.loadStagesFromCsv = function () {
+
+    let titreDuStage = document.getElementById('titreDuStage').value 
+    console.log(titreDuStage)
       
     convertJsonFactory.convertStagesToJson(fileList[0].name).then(success => {
-        $scope.listStages = success.data
+      $scope.listStages = success.data
       toolsFactory.notifySucess('Les stages sont récupérés avec succés ')
     }, error => {
         toolsFactory.notifyFailure('Les stages ne sont pas récupérés suite à un problème ')
