@@ -50,7 +50,8 @@ exports.convertAllStagesJsonToCsv = function (req, res) {
   })
 };
 
-  exports.convertOneStageJsonToCsv = function (req, res) {
+
+exports.convertOneStageJsonToCsv = function (req, res) {
     let data = JSON.parse(req.query.data) 
       converter.json2csv(data, (err, csv) => {
           if (err) {
