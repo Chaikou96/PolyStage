@@ -4,17 +4,15 @@ const config = {
   },
   db: {
     host: 'localhost',
-    port: 8889,
-    database: 'polystage',
-    user: 'root',
+    port: 3306,
+    database: 'phpmyadmin',
+    user: 'phpmyadmin',
     password: 'root'
   },
   gmail: {
-    user: 'aymendamak2@gmail.com',
+    user: 'bobocheck2006@gmail.com',
     mdp: '...'
   }
 };
 
-
 module.exports = config;
-
