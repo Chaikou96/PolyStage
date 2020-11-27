@@ -42,7 +42,7 @@ module.exports = function (app) {
 
 //MMM
   app.route('/statistique')
-    .get(StageControlleur.list_stage_byAnne);
+    .get(StageControlleur.list_stage_byAnnee);
   
   app.route('/stages/update')
     .get(MailControlleur.verif_dates_stage);

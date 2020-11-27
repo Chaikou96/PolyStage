@@ -60,7 +60,7 @@ Stage.getStageById = function (idstage, result) {
 
 //MMM
 Stage.getStageByAnnee = function (result) {
-    var query = "SELECT annee FROM stage"
+    var query = "SELECT annee, COUNT(annee) as nbre_stage FROM stage GROUP BY annee"
     db.query(query, function (err, res) {
         if (err) {
             console.log("error: ", err);
