@@ -4,8 +4,7 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
       $location.path("/404")
   }
 
-  $scope.listStages 
-  $scope.etudiant = "Etudiant"
+  $scope.listStages
   // une grande partie doit se deplacer dans un nouveau controller rechercherStageController 
   let fileList;
   const fileSelector = document.getElementById('fileInput');
@@ -14,18 +13,14 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
   });
     
   
-  $scope.loadStagesFromCsv = function () {
-
-    let titreDuStage = document.getElementById('titreDuStage').value 
-    console.log(titreDuStage)
-      
+  $scope.loadStagesFromCsv = function () { 
     convertJsonFactory.convertStagesToJson(fileList[0].name).then(success => {
       $scope.listStages = success.data
+      console.log($scope.listStages)
       toolsFactory.notifySucess('Les stages sont récupérés avec succés ')
     }, error => {
         toolsFactory.notifyFailure('Les stages ne sont pas récupérés suite à un problème ')
     })
-    
     
   }
     
@@ -46,6 +41,48 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
   $scope.cancelSave = function () {
     location.reload()
   }  
+
+  // le stage à modifier
+  $scope.currentItem = {}
+  $scope.init = function (item) {
+    let Sujetdustage = document.getElementById("Sujetdustage")
+    Sujetdustage.value = item.Sujetdustage 
+    let Raisonsociale = document.getElementById("Raisonsociale")
+    Raisonsociale.value = item.Raisonsociale;
+    let VilledeStage = document.getElementById("VilledeStage")
+    VilledeStage.value = item.VilledeStage;
+    let PaysdeStage = document.getElementById("PaysdeStage")
+    PaysdeStage.value = item.PaysdeStage;
+    let Datededebut = document.getElementById("Datededebut")
+    Datededebut.value = item.Datededebut;
+    let Datedefin = document.getElementById("Datedefin")
+    Datedefin.value = item.Datedefin;
+
+    // le stage à modifier
+    currentItem = item
+  }
+
+  $scope.SaveModifications = function () {
+    let Sujetdustage = document.getElementById("Sujetdustage").value
+    let Raisonsociale = document.getElementById("Raisonsociale").value
+    let VilledeStage = document.getElementById("VilledeStage").value
+    let PaysdeStage = document.getElementById("PaysdeStage").value
+    let Datededebut = document.getElementById("Datededebut").value
+    let Datedefin = document.getElementById("Datedefin").value
+
+    let newItem = {
+      'Sujetdustage': Sujetdustage,
+      'Raisonsociale':Raisonsociale,
+      'VilledeStage': VilledeStage,
+      'PaysdeStage': PaysdeStage,
+      'Datededebut': Datededebut,
+      'Datedefin': Datedefin
+    }
+    let indexItem = $scope.listStages.indexOf(currentItem);
+    $scope.listStages[indexItem] = newItem
+    toolsFactory.notifySucess('Données du stage modifiées avec succés')
+    $('#modifyModal').modal('hide')
+  }
 
   $scope.checkIsAdmin()
 })

@@ -25,6 +25,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
   $scope.init = function(item)
   {
     stageItem = item;
+
   };
 
 

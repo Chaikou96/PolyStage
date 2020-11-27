@@ -15,92 +15,14 @@
         </div>
       </div>
     </form>
-  </div>
-</div>
-<br>
-
-<div ng-if="!listStages" >
-  <div class="d-flex justify-content-center" >
-    <div class="card w-75 text-center">
-      <div class="card-body">
-        <h2>Configurer la saisie des données</h2>
-        <p class="text-danger">veuillez vérifier les informations saisies avant de sauvegarder</p>
-
-        <div class="d-flex flex-wrap float-left w-50" >
-          <label>Titre du stage</label>
-          <select class="browser-default custom-select" id="titreDuStage" >
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-          <label>Nom de l'entreprise</label>
-          <select class="browser-default custom-select" id="nomEntreprise">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-          <label>Nom de l'étudiant</label>
-          <select class="browser-default custom-select" id="nomEtudiant">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-
-          <label>Prénom de l'étudiant</label>
-          <select class="browser-default custom-select" id="prenomEtudiant" >
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-
-        <div class="d-flex flex-wrap float-right  w-50" >
-          <label>Promo</label>
-          <select class="browser-default custom-select" id="promo">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-          <label>Date de début du stage</label>
-          <select class="browser-default custom-select" id="dateDebut">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-          <label>Date de fin de stage</label>
-          <select class="browser-default custom-select" id="dateFin">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-
-          <label>Tuteur</label>
-          <select class="browser-default custom-select" id="tuteur" >
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        
-        <button  type="button" class="btn btn-danger btn-lg float-lg-right" data-toggle="modal" data-target="#exampleModal">Annuler</button>
-        <button ng-click="loadStagesFromCsv()"  class="btn btn-success btn-lg float-lg-right">OK</button>  
-      </div>
-    </div>
+    <button ng-click="loadStagesFromCsv()"  class="btn btn-success btn-lg ">Load</button>
   </div>
 </div>
 
 <br>
 
 <div ng-if="listStages">
-  <div class="d-flex justify-content-center" >
+  <div class="d-flex justify-content-center">
     <div class="card w-75 text-center">
       <div class="card-body">
         <h2>La liste des stages</h2>
@@ -108,7 +30,7 @@
         <button  type="button" class="btn btn-danger btn-lg float-lg-right" data-toggle="modal" data-target="#exampleModal">Annuler</button>
         <button ng-click="saveStages()"  class="btn btn-success btn-lg float-lg-right">Sauvegarder</button>  
       </div>
-      <h3> {{etudiant}} </h3>
+      
       <div class="card border-dark text-center" ng-repeat="stage in listStages">
         <div class="card-header bg-transparent">
           <h3> {{stage.Sujetdustage}} </h3>
@@ -132,6 +54,7 @@
           <h5 class="card-title">Date de fin</h5>
           <p class="card-text">{{stage.Datedefin}}</p>
         
+          <button  ng-click="init(stage)" type="button" class="btn btn-danger btn-lg " data-toggle="modal" data-target="#modifyModal">Modifier</button>
         </div>
       </div>
     </div>
@@ -139,6 +62,51 @@
 </div>
 
 
+<!-- Modify modal -->
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier les informations du stage</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="Sujetdustage">Sujet Du Stage</label>
+            <input type="text" class="form-control" id="Sujetdustage" aria-describedby="SujetdustageHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="Raisonsociale">Raison Sociale</label>
+            <input type="text" class="form-control" id="Raisonsociale" aria-describedby="RaisonsocialeHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="VilledeStage">Ville de Stage</label>
+            <input type="text" class="form-control" id="VilledeStage" aria-describedby="VilledeStageHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="PaysdeStage">Pays De Stage</label>
+            <input type="text" class="form-control" id="PaysdeStage" aria-describedby="PaysdeStageHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="Datededebut">Date De Debut</label>
+            <input type="text" class="form-control" id="Datededebut" aria-describedby="DatededebutHelp" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="Datedefin">Date De Fin</label>
+            <input type="text" class="form-control" id="Datedefin" aria-describedby="DatedefinHelp" placeholder="">
+          </div>
+        </form>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+        <button ng-click="SaveModifications()" type="button" class="btn btn-danger">Sauvegarder</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Confirm modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
