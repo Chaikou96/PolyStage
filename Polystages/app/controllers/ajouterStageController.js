@@ -26,6 +26,7 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
     
 
   $scope.saveStages = function () {
+
     $scope.listStages.forEach(element => {
       stageFactory.createStageWithCsv(element).then(success => {
         toolsFactory.notifySucess('Les stages sont enregistrés avec succés')
@@ -58,6 +59,15 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
     let Datedefin = document.getElementById("Datedefin")
     Datedefin.value = item.Datedefin;
 
+    let Etudiant = document.getElementById("Etudiant")
+    Etudiant.value = item.Etudiant;
+
+    let TuteurDesStagesDansLentreprise = document.getElementById("TuteurDesStagesDansLentreprise")
+    TuteurDesStagesDansLentreprise.value = item.TuteurDesStagesDansLentreprise;
+
+    let MailTuteurDesStageDansLentreprise = document.getElementById("MailTuteurDesStageDansLentreprise")
+    MailTuteurDesStageDansLentreprise.value = item.MailTuteurDesStageDansLentreprise;
+
     // le stage à modifier
     currentItem = item
   }
@@ -69,6 +79,9 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
     let PaysdeStage = document.getElementById("PaysdeStage").value
     let Datededebut = document.getElementById("Datededebut").value
     let Datedefin = document.getElementById("Datedefin").value
+    let Etudiant = document.getElementById("Etudiant").value
+    let TuteurDesStagesDansLentreprise = document.getElementById("TuteurDesStagesDansLentreprise").value
+    let MailTuteurDesStageDansLentreprise = document.getElementById("MailTuteurDesStageDansLentreprise").value
 
     let newItem = {
       'Sujetdustage': Sujetdustage,
@@ -76,8 +89,12 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
       'VilledeStage': VilledeStage,
       'PaysdeStage': PaysdeStage,
       'Datededebut': Datededebut,
-      'Datedefin': Datedefin
+      'Datedefin': Datedefin,
+      'MailTuteurDesStageDansLentreprise': MailTuteurDesStageDansLentreprise,
+      'TuteurDesStagesDansLentreprise': TuteurDesStagesDansLentreprise,
+      'Etudiant': Etudiant
     }
+
     let indexItem = $scope.listStages.indexOf(currentItem);
     $scope.listStages[indexItem] = newItem
     toolsFactory.notifySucess('Données du stage modifiées avec succés')

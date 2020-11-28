@@ -37,7 +37,6 @@ simpleApp.factory('toolsFactory', function () {
                 var wrapper = document.getElementById('pagination-wrapper')
             
                 wrapper.innerHTML = ``
-                console.log('Pages:', pages)
             
                 var maxLeft = (state.page - Math.floor(state.window / 2))
                 var maxRight = (state.page + Math.floor(state.window / 2))
@@ -77,7 +76,6 @@ simpleApp.factory('toolsFactory', function () {
             
                     buildTable()
                 })
-            
             }
             
             
@@ -91,7 +89,7 @@ simpleApp.factory('toolsFactory', function () {
             
               for (var i = 1 in myList) {
                   //Keep in mind we are using "Template Litterals to create rows"
-                var row = ` <tr>
+                  var row = ` <tr>
                               <th scope="row">${i}</th>
                               <td>${myList[i].titrestage}</td>
                               <td>${myList[i].description}</td>
