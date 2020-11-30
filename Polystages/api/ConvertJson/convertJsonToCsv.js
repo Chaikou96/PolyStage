@@ -67,6 +67,7 @@ exports.convertOneStageJsonToCsv = function (req, res) {
 exports.convertStagesCsvToJson = function (req, res) { 
   let json = csvToJson.getJsonFromCsv(req.query.data);
   console.log('convert csv to json')
+  console.log(json)
   res.send(json) 
 };
   

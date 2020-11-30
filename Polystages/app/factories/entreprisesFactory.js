@@ -19,6 +19,13 @@ simpleApp.factory('entreprisesFactory', function ($http) {
                 params : { 'identreprise' : id }
             })
         },
+        getEntreprisesIdByName: function (name) {
+            return $http({
+                method: 'GET',
+                url: 'http://localhost:8080/entreprises/ByName/' + name,
+                params : { 'entrepriseName' : name }
+             })
+        },
         addEntreprise: function (name) {
             return $http({
                 method: 'POST',

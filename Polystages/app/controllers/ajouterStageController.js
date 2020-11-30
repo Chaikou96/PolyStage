@@ -16,7 +16,7 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
   $scope.loadStagesFromCsv = function () { 
     convertJsonFactory.convertStagesToJson(fileList[0].name).then(success => {
       $scope.listStages = success.data
-      console.log($scope.listStages)
+      //console.log($scope.listStages)
       toolsFactory.notifySucess('Les stages sont récupérés avec succés ')
     }, error => {
         toolsFactory.notifyFailure('Les stages ne sont pas récupérés suite à un problème ')
@@ -28,11 +28,18 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
   $scope.saveStages = function () {
 
     $scope.listStages.forEach(element => {
-      stageFactory.createStageWithCsv(element).then(success => {
-        toolsFactory.notifySucess('Les stages sont enregistrés avec succés')
-      }, error => {
-        toolsFactory.notifyFailure('Erreur, Les données du stage(s) ne sont pas enregistrées' )
-      })
+
+      // get id entreprise with name 
+      entreprisesFactory.getEntreprisesIdByName(element.Raisonsociale).then(success => {
+        element.identreprise = success.data[0].identreprise
+        stageFactory.createStageWithCsv(element).then(success => {
+          toolsFactory.notifySucess('Les stages sont enregistrés avec succés')
+        }, error => {
+          toolsFactory.notifyFailure('Erreur, Les données du stage(s) ne sont pas enregistrées')
+        })
+      });
+      //console.log(element)
+      
     });
     /*setTimeout(function () {
       location.reload()
@@ -63,13 +70,14 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
     Etudiant.value = item.Etudiant;
 
     let TuteurDesStagesDansLentreprise = document.getElementById("TuteurDesStagesDansLentreprise")
-    TuteurDesStagesDansLentreprise.value = item.TuteurDesStagesDansLentreprise;
+    TuteurDesStagesDansLentreprise.value = item.Tuteurdestagedanslentreprise;
 
     let MailTuteurDesStageDansLentreprise = document.getElementById("MailTuteurDesStageDansLentreprise")
-    MailTuteurDesStageDansLentreprise.value = item.MailTuteurDesStageDansLentreprise;
+    MailTuteurDesStageDansLentreprise.value = item.MailTuteurdestagedanslentreprise;
 
     // le stage à modifier
     currentItem = item
+    //console.log(currentItem)
   }
 
   $scope.SaveModifications = function () {
@@ -83,17 +91,17 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
     let TuteurDesStagesDansLentreprise = document.getElementById("TuteurDesStagesDansLentreprise").value
     let MailTuteurDesStageDansLentreprise = document.getElementById("MailTuteurDesStageDansLentreprise").value
 
-    let newItem = {
-      'Sujetdustage': Sujetdustage,
-      'Raisonsociale':Raisonsociale,
-      'VilledeStage': VilledeStage,
-      'PaysdeStage': PaysdeStage,
-      'Datededebut': Datededebut,
-      'Datedefin': Datedefin,
-      'MailTuteurDesStageDansLentreprise': MailTuteurDesStageDansLentreprise,
-      'TuteurDesStagesDansLentreprise': TuteurDesStagesDansLentreprise,
-      'Etudiant': Etudiant
-    }
+    let newItem = currentItem;
+    // mettre a jour le stage avec les nouvelles informations
+    newItem.Sujetdustage = Sujetdustage
+    newItem.Raisonsociale = Raisonsociale
+    newItem.VilledeStage = VilledeStage
+    newItem.PaysdeStage = PaysdeStage
+    newItem.Datededebut = Datededebut
+    newItem.Datedefin = Datedefin
+    newItem.MailTuteurDesStageDansLentreprise = MailTuteurDesStageDansLentreprise
+    newItem.TuteurDesStagesDansLentreprise = TuteurDesStagesDansLentreprise
+    newItem.Etudiant = Etudiant
 
     let indexItem = $scope.listStages.indexOf(currentItem);
     $scope.listStages[indexItem] = newItem

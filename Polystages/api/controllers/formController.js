@@ -73,7 +73,6 @@ exports.FormEleve = function (req, res) {
 }
 
 exports.FormEleveCsv = function (req, res) {
-
   if (req.body.adresseentreprise) {
     Entreprise.updateEntreprise(req.body, function (res) { })
   }
@@ -95,7 +94,7 @@ exports.FormEleveCsv = function (req, res) {
     })
   } else {
     console.log('hello there')
-    var new_stage = Stage.StageCsv(req.body, 0);
+    let new_stage = Stage.StageCsv(req.body, 0);
     Stage.createStage(new_stage, function (err, result) {
       if (err) res.status(500).send(err);
       res.status(result).send();

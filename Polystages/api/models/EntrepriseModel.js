@@ -40,6 +40,20 @@ Entreprise.getEntrepriseById = function (identreprise, result) {
     });
 };
 
+Entreprise.getEntrepriseByName = function (entrepriseName, result) {
+    
+    var query = `Select * from entreprise where nomcomplet = "${entrepriseName}" `
+    db.query(query, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else {
+            result(null, res);
+        }
+    });
+};
+
 Entreprise.createEntreprise = function (bodyForm, result) {
     var new_entreprise = new Entreprise(bodyForm);
     db.query("Select * from entreprise where nomcomplet = ?",

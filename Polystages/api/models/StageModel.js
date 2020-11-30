@@ -25,15 +25,16 @@ var Stage = function (stage, idtuteur) {
 //Task object constructor
 Stage.StageCsv = function (stage, idtuteur) {
     console.log("stageCsv")
+    console.log(stage)
     let stageObj = {
         //'niveau' : stage.niveau,
         //'annee' : stage.annee,
         //'idens': stage.idens,
         //'idtuteur' : stage.idtuteur,
-        'datedebut' : stage.Datededebut,
-        'datefin': stage.Datedefin,
-        //'identreprise' : stage.identreprise,
-        'titrestage' : stage.Sujetdustage
+        datedebut : stage.Datededebut,
+        datefin: stage.Datedefin,
+        identreprise : stage.identreprise,
+        titrestage : stage.Sujetdustage
         //'description' : stage.description,
         //'adremailstage' : stage.adremailstage,
         //'adressestage' : stage.adressestage,
@@ -241,6 +242,7 @@ Stage.createStage = function (newStage, result) {
                 // formate date to YYYY/MM/DD to set into the database
                 newStage.datedebut = formatDate(newStage.datedebut)
                 newStage.datefin = formatDate(newStage.datedebut)
+                console.log(newStage)
                 db.query("INSERT INTO stage set ?", newStage, function (err, res) {
                     if (err) {
                         console.log("error: ", err);

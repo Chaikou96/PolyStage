@@ -19,6 +19,9 @@ module.exports = function (app) {
   app.route('/entreprises/ById/:identreprise')
     .get(EntrepriseControlleur.get_entreprise_name_by_id)
   
+  app.route('/entreprises/ByName/:entrepriseName')
+    .get(EntrepriseControlleur.get_entreprise_id_by_name)
+  
   app.route('/enseignants')
     .get(EnseignantControlleur.list_all_enseignants);
 
