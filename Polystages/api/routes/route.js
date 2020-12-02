@@ -28,6 +28,9 @@ module.exports = function (app) {
   app.route('/eleves')
     .get(EleveControlleur.list_all_eleve);
 
+  app.route('/elevesId/byNomAndPrenom')
+    .get(EleveControlleur.get_eleve_id_by_nom_and_prenom);
+
   app.route('/eleves/retard')
     .get(MailControlleur.list_all_retard_eleve);
 
@@ -36,6 +39,9 @@ module.exports = function (app) {
 
   app.route('/tuteurs')
     .get(TuteurControlleur.list_all_tuteurs);
+  
+  app.route('/tuteurId/byNomAndPrenom')
+    .get(TuteurControlleur.get_tuteur_id_by_nom_and_prenom);
 
   app.route('/tuteurs/retard')
     .get(MailControlleur.list_all_retard_tuteur);

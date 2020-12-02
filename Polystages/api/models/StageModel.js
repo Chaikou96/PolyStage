@@ -27,15 +27,16 @@ Stage.StageCsv = function (stage, idtuteur) {
     console.log("stageCsv")
     console.log(stage)
     let stageObj = {
-        //'niveau' : stage.niveau,
-        //'annee' : stage.annee,
+        niveau : stage.Niveau,
+        annee : stage.Annee,
         //'idens': stage.idens,
-        //'idtuteur' : stage.idtuteur,
+        idtuteur : stage.idtuteur,
         datedebut : stage.Datededebut,
         datefin: stage.Datedefin,
         identreprise : stage.identreprise,
-        titrestage : stage.Sujetdustage
-        //'description' : stage.description,
+        titrestage : stage.Sujetdustage,
+        description: stage.Description,
+        ideleve: stage.ideleve
         //'adremailstage' : stage.adremailstage,
         //'adressestage' : stage.adressestage,
         //'cheminrapport': stage.cheminrapport,
@@ -50,6 +51,7 @@ Stage.StageCsv = function (stage, idtuteur) {
         //'datecomp': stage.datecomp,
         //'chemincomp': stage.chemincomp
     }
+    console.log('sortie constructuer stageCsv')
     console.log(stageObj)
     return stageObj;
 };
@@ -242,7 +244,7 @@ Stage.createStage = function (newStage, result) {
                 // formate date to YYYY/MM/DD to set into the database
                 newStage.datedebut = formatDate(newStage.datedebut)
                 newStage.datefin = formatDate(newStage.datedebut)
-                console.log(newStage)
+                //console.log(newStage)
                 db.query("INSERT INTO stage set ?", newStage, function (err, res) {
                     if (err) {
                         console.log("error: ", err);

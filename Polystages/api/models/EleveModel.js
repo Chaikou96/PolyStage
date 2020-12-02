@@ -53,4 +53,18 @@ Eleve.getEleveById = function (eleveId, result) {
     });
 }
 
+Eleve.getEleveIdByNomAndPrenom = function (NameEtudiant, PrenomEtudiant, result) {
+    let query = `SELECT * FROM eleves WHERE ( nom = "${NameEtudiant}" )  AND ( prenom = "${PrenomEtudiant}" ) `;
+    db.query(query, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else {
+            console.log(res)
+            result(null, res);
+        }
+    });
+}
+
 module.exports = Eleve;

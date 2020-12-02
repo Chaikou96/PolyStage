@@ -14,5 +14,19 @@ simpleApp.factory('userFactory', function ($http) {
                 params : { 'eleveId' : id }
             })
         },
+        getEleveIdByNomAndPrenom: function (nom, prenom) {
+            return $http({
+                method: 'GET',
+                url: 'http://localhost:8080/elevesId/byNomAndPrenom',
+                params: { "nom" : nom , "prenom": prenom }
+            })
+        },
+        getTuteurIdByNomAndPrenom: function (nom, prenom) {
+            return $http({
+                method: 'GET',
+                url: 'http://localhost:8080/tuteurId/byNomAndPrenom',
+                params: { "nom" : nom , "prenom": prenom }
+            })
+        },
     }
 })

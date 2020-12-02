@@ -31,7 +31,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
 
   $scope.setSearchValue = function () {
     $scope.val = document.getElementById("searchBar").value
-    console.log($scope.val)
+    //console.log($scope.val)
   }
 
   // recuperer tous les stages

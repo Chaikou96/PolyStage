@@ -36,6 +36,19 @@ Tuteur.getTuteurById = function (idtuteur, result) {
     });
 };
 
+Tuteur.getTuteurIdByNomAndPrenom = function (nom, prenom, result) {
+    var query = ` Select * from tuteurs where (nom = "${nom}") and (prenom = "${prenom}" ) `
+    db.query(query, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else {
+            result(null, res);
+        }
+    });
+};
+
 
 Tuteur.createTuteur = function (bodyForm, result) {
     var tuteur = new Tuteur(bodyForm);
