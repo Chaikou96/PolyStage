@@ -132,7 +132,52 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     let index = selectedNb.selectedIndex
     let nbStagePerPage = selectedNb.options[index].value
     console.log(nbStagePerPage)
-}
+  }
+
+  // le stage à modifier
+  $scope.currentItem = {}
+  $scope.initModify = function (item) {
+    let Sujetdustage = document.getElementById("Sujetdustage")
+    Sujetdustage.value = item.titrestage 
+    let Raisonsociale = document.getElementById("Raisonsociale")
+    Raisonsociale.value = item.Raisonsociale;
+    let VilledeStage = document.getElementById("VilledeStage")
+    VilledeStage.value = item.VilledeStage;
+    let PaysdeStage = document.getElementById("PaysdeStage")
+    PaysdeStage.value = item.PaysdeStage;
+    let Datededebut = document.getElementById("Datededebut")
+    Datededebut.value = item.Datededebut;
+    let Datedefin = document.getElementById("Datedefin")
+    Datedefin.value = item.Datedefin;
+
+    let NomEtudiant = document.getElementById("NomEtudiant")
+    NomEtudiant.value = item.Nomdeleleve;
+
+    let PrenomEtudiant = document.getElementById("PrenomEtudiant")
+    PrenomEtudiant.value = item.Prenomdeleleve;
+
+    let NomduTuteurdestagedanslentreprise = document.getElementById("NomduTuteurDesStagesDansLentreprise")
+    NomduTuteurdestagedanslentreprise.value = item.NomduTuteurdestagedanslentreprise;
+
+    let PrenomduTuteurdestagedanslentreprise = document.getElementById("PrenomduTuteurDesStagesDansLentreprise")
+    PrenomduTuteurdestagedanslentreprise.value = item.PrenomduTuteurdestagedanslentreprise;
+
+    let MailTuteurDesStageDansLentreprise = document.getElementById("MailTuteurDesStageDansLentreprise")
+    MailTuteurDesStageDansLentreprise.value = item.MailTuteurdestagedanslentreprise;
+
+    let Adressedustage = document.getElementById("Adressedustage")
+    Adressedustage.value = item.Adressedustage;
+
+    let Prenomenseignantencadrant = document.getElementById("Prenomenseignantencadrant")
+    Prenomenseignantencadrant.value = item.Prenomenseignantencadrant;
+
+    let Nomenseignantencadrant = document.getElementById("Nomenseignantencadrant")
+    Nomenseignantencadrant.value = item.Nomenseignantencadrant;
+
+    // le stage à modifier
+    currentItem = item
+    //console.log(currentItem)
+  }
  
   $scope.checkIsAdmin()
 })
