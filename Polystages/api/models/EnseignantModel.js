@@ -50,6 +50,19 @@ Enseignant.getEnseignantById = function (enseignantId, result) {
     });
 };
 
+Enseignant.getEnseignantIdByNomAndPrenom = function (nom, prenom, result) {
+    db.query(`Select * from enseignants where (nom = "${nom}") and (prenom = "${prenom}") `, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else {
+            console.log(res)
+            result(null, res);
+        }
+    });
+};
+
 Enseignant.createEnseignant = function (newEnseignant, result) {
     db.query("INSERT INTO enseignants set ?", newEnseignant, function (err, res) {
 

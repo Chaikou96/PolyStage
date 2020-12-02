@@ -24,6 +24,9 @@ module.exports = function (app) {
   
   app.route('/enseignants')
     .get(EnseignantControlleur.list_all_enseignants);
+  
+  app.route('/enseignantsId/ByNomPrenom')
+    .get(EnseignantControlleur.get_enseignantId_By_nom_prenom);
 
   app.route('/eleves')
     .get(EleveControlleur.list_all_eleve);

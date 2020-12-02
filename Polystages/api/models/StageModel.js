@@ -29,16 +29,16 @@ Stage.StageCsv = function (stage, idtuteur) {
     let stageObj = {
         niveau : stage.Niveau,
         annee : stage.Annee,
-        //'idens': stage.idens,
+        idens: stage.idens,
         idtuteur : stage.idtuteur,
         datedebut : stage.Datededebut,
         datefin: stage.Datedefin,
         identreprise : stage.identreprise,
         titrestage : stage.Sujetdustage,
         description: stage.Description,
-        ideleve: stage.ideleve
+        ideleve: stage.ideleve,
         //'adremailstage' : stage.adremailstage,
-        //'adressestage' : stage.adressestage,
+        adressestage : stage.Adressedustage
         //'cheminrapport': stage.cheminrapport,
         //'cheminpres': stage.cheminpres,
         //'chemineval': stage.cheminval,
