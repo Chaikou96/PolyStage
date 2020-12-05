@@ -25,6 +25,9 @@ module.exports = function (app) {
   app.route('/enseignants')
     .get(EnseignantControlleur.list_all_enseignants);
   
+  app.route('/enseignantsNameById')
+    .get(EnseignantControlleur.get_ens_name_by_id);
+  
   app.route('/enseignantsId/ByNomPrenom')
     .get(EnseignantControlleur.get_enseignantId_By_nom_prenom);
 
@@ -46,6 +49,9 @@ module.exports = function (app) {
   app.route('/tuteurId/byNomAndPrenom')
     .get(TuteurControlleur.get_tuteur_id_by_nom_and_prenom);
 
+  app.route('/tuteurNameById')
+    .get(TuteurControlleur.get_tuteur_name_by_id);
+
   app.route('/tuteurs/retard')
     .get(MailControlleur.list_all_retard_tuteur);
 
@@ -58,9 +64,16 @@ module.exports = function (app) {
   app.route('/stages/:idstage')
     .get(StageControlleur.list_stage_byId)
     .put(FormControlleur.update_stage_byId);
+
+  app.route('/stageInfos/:idstage')
+    .get(StageControlleur.list_stage_byId)
+    .put(FormControlleur.update_stageInfos_byId);
   
   app.route('/stagesInfosById/:idstage')
     .get(StageControlleur.list_stage_InfosbyId)
+
+  app.route('/deleteStage/:idstage')
+    .get(StageControlleur.delete_stage_by_id)
   
   app.route('/stages/byIdEleve/:ideleve')
     .get(StageControlleur.list_stage_byeleveId);

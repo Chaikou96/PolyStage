@@ -56,6 +56,39 @@ Stage.StageCsv = function (stage, idtuteur) {
     return stageObj;
 };
 
+Stage.upadteStageConst = function (stage, idtuteur) {
+    console.log("upadteStageConst")
+    console.log(stage)
+    let stageObj = {
+        niveau : stage.niveau,
+        annee : stage.annee,
+        idens: stage.idens,
+        idtuteur : stage.idtuteur,
+        datedebut : stage.datedebut,
+        datefin: stage.datefin,
+        identreprise : stage.identreprise,
+        titrestage : stage.titrestage,
+        description: stage.description,
+        ideleve: stage.ideleve,
+        //'adremailstage' : stage.adremailstage,
+        adressestage : stage.adressestage
+        //'cheminrapport': stage.cheminrapport,
+        //'cheminpres': stage.cheminpres,
+        //'chemineval': stage.cheminval,
+        //'dateeval': stage.dateeval,
+        //'evallancee': stage.evallancee,
+        //'confidentiel': stage.confidentiel,
+        //'datelimiterendu': stage.datelimiterendu,
+        //'datelimiteeval': stage.datalimiteeval,
+        //'datesoutenance': stage.datesoutenance,
+        //'datecomp': stage.datecomp,
+        //'chemincomp': stage.chemincomp
+    }
+    console.log('sortie constructuer upadteStageConst')
+    console.log(stageObj)
+    return stageObj;
+};
+
 function DateUpdate(stage) {
     stage.datedebut = formatDateForSQL(stage.datedebut);
     stage.datefin = formatDateForSQL(stage.datefin);
@@ -279,6 +312,8 @@ Stage.updateStage = function (idstage, newStage, result) {
             result(err, null);
         }
         if (stage && stage.length) {
+            newStage.datedebut = formatDate(newStage.datedebut)
+            newStage.datefin = formatDate(newStage.datedebut)
             db.query("UPDATE stage SET ? WHERE idstage = ?", [newStage, idstage], function (err, res) {
                 if (err) {
                     console.log("error: ", err);
@@ -293,6 +328,19 @@ Stage.updateStage = function (idstage, newStage, result) {
             result(null, 404);
         }
     })
+};
+
+Stage.deleteStage = function (idstage, result) {
+    let query = "DELETE FROM stage WHERE idstage = ?"
+    db.query(query, [idstage], function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else {
+            result(null, res)
+        }
+    });
 };
 
 module.exports = Stage;

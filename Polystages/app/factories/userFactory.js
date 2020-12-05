@@ -28,5 +28,19 @@ simpleApp.factory('userFactory', function ($http) {
                 params: { "nom" : nom , "prenom": prenom }
             })
         },
+        getEnsNameById: function (id) {
+            return $http({
+                method: 'GET',
+                url: 'http://localhost:8080/enseignantsNameById',
+                params: { "idens" : id }
+            })
+        },
+        getTuteurNameById: function (id) {
+            return $http({
+                method: 'GET',
+                url: 'http://localhost:8080/tuteurNameById',
+                params: { "idtuteur" : id }
+            })
+        },
     }
 })

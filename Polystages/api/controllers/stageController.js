@@ -90,3 +90,12 @@ exports.list_stage_byIdForEval = function (req, res) {
     res.send(stage);
   })
 }
+
+exports.delete_stage_by_id = function (req, res) {
+  console.log(req.params.idstage)
+  Stage.deleteStage(req.params.idstage, function (err, stage) {
+    if (err)
+      res.send(err);
+    res.send(stage);
+  })
+}

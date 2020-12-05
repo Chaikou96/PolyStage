@@ -72,7 +72,6 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
         toolsFactory.notifyFailure('Erreur, Les données du stage(s) ne sont pas enregistrées')
       })
     })
-    
   }
 
   $scope.getEntreprisesIdByName = function (stages) {

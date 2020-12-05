@@ -37,9 +37,25 @@ simpleApp.factory('stageFactory', function ($http) {
             })
         },
         editStage: function (idstage, data) {
+            console.log(data)
             return $http({
                 method: 'PUT',
                 url: 'http://localhost:8080/stages/' + idstage,
+                data: data
+            })
+        },
+        updateStage: function (idstage, data) {
+            console.log(data)
+            return $http({
+                method: 'PUT',
+                url: 'http://localhost:8080/stageInfos/' + idstage,
+                data: data
+            })
+        },
+        deleteStage: function (idstage, data) {
+            return $http({
+                method: 'GET',
+                url: 'http://localhost:8080/deleteStage/' + idstage,
                 data: data
             })
         },

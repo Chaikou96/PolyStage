@@ -41,7 +41,6 @@ Entreprise.getEntrepriseById = function (identreprise, result) {
 };
 
 Entreprise.getEntrepriseByName = function (entrepriseName, result) {
-    
     var query = `Select * from entreprise where nomcomplet = "${entrepriseName}" `
     db.query(query, function (err, res) {
         if (err) {

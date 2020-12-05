@@ -19,3 +19,12 @@ exports.get_enseignantId_By_nom_prenom = function (req, res) {
     res.send(enseignants);
   });
 };
+
+exports.get_ens_name_by_id = function (req, res) {
+  console.log(req.query.idens)
+  Enseignant.getEnseignantById(req.query.idens, function (err, enseignants) {
+    if (err)
+      res.send(err);
+    res.send(enseignants);
+  });
+};

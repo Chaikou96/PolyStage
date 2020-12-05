@@ -20,13 +20,10 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     state.rows = value
     toolsFactory.setPagination(state,$scope.init)
   }) */
-  
-  
-  $scope.init = function(item)
-  {
-    stageItem = item;
 
-  };
+  $scope.stageItem;
+  
+  
 
 
   $scope.setSearchValue = function () {
@@ -41,7 +38,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
         $scope.stages = success.data
         $scope.getNomEntreprise($scope.stages)
         state.querySet = $scope.stages
-        toolsFactory.setPagination(state,$scope.init)
+        //toolsFactory.setPagination(state,$scope.initModify)
       }, function (error) {
         //$scope.erreurAuthentification()
       })
@@ -59,7 +56,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
         $scope.stages = success.data
         $scope.getNomEntreprise($scope.stages)
         state.querySet = $scope.stages
-        toolsFactory.setPagination(state,$scope.init)
+        //toolsFactory.setPagination(state,$scope.initModify)
       }, function (error) {
         //$scope.erreurAuthentification()
       })
@@ -92,7 +89,8 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
   }
 
   // recuperer un stage avec Id
-  $scope.allStagesInfosById = function () {
+  $scope.allStagesInfosById = function (stageItem) {
+    console.log(stageItem)
     stageFactory.getStageById(stageItem.idstage)
       .then(function (success) {
         $scope.stageItem = success.data
@@ -119,7 +117,6 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     stage.forEach(element => {
       userFactory.getEleveNameById(element.ideleve)
         .then(function (success) {
-          console.log(success.data[0])
           element.nomEleve = success.data[0].nom
           element.prenomEleve = success.data[0].prenom
         })
@@ -131,53 +128,150 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     console.log(selectedNb)
     let index = selectedNb.selectedIndex
     let nbStagePerPage = selectedNb.options[index].value
-    console.log(nbStagePerPage)
   }
 
   // le stage à modifier
   $scope.currentItem = {}
   $scope.initModify = function (item) {
-    let Sujetdustage = document.getElementById("Sujetdustage")
-    Sujetdustage.value = item.titrestage 
-    let Raisonsociale = document.getElementById("Raisonsociale")
-    Raisonsociale.value = item.Raisonsociale;
+    //console.log(item)
+    let titrestage = document.getElementById("Sujetdustage")
+    titrestage.value = item.titrestage 
+    let description = document.getElementById("Descriptiondustage")
+    description.value = item.description 
+    let nomentreprise = document.getElementById("Raisonsociale")
+    nomentreprise.value = item.nomentreprise;
     let VilledeStage = document.getElementById("VilledeStage")
     VilledeStage.value = item.VilledeStage;
     let PaysdeStage = document.getElementById("PaysdeStage")
     PaysdeStage.value = item.PaysdeStage;
-    let Datededebut = document.getElementById("Datededebut")
-    Datededebut.value = item.Datededebut;
-    let Datedefin = document.getElementById("Datedefin")
-    Datedefin.value = item.Datedefin;
+    let datedebut = document.getElementById("Datededebut")
+    datedebut.value = item.datedebut;
+    let datefin = document.getElementById("Datedefin")
+    datefin.value = item.datefin;
 
-    let NomEtudiant = document.getElementById("NomEtudiant")
-    NomEtudiant.value = item.Nomdeleleve;
+    // get nom and prenom eleve with his id 
+    userFactory.getEleveNameById(item.ideleve).then(success => {
+      let nomEleve = document.getElementById("NomEtudiant")
+      item.nomEleve = success.data[0].nom
+      nomEleve.value = item.nomEleve;
 
-    let PrenomEtudiant = document.getElementById("PrenomEtudiant")
-    PrenomEtudiant.value = item.Prenomdeleleve;
+      let prenomEleve = document.getElementById("PrenomEtudiant")
+      item.prenomEleve = success.data[0].prenom
+      prenomEleve.value = item.prenomEleve;
+      
+    })
 
-    let NomduTuteurdestagedanslentreprise = document.getElementById("NomduTuteurDesStagesDansLentreprise")
-    NomduTuteurdestagedanslentreprise.value = item.NomduTuteurdestagedanslentreprise;
+    // get nom et prenom encadrant  
+    userFactory.getEnsNameById(item.idens).then(success => {
+      let Nomenseignantencadrant = document.getElementById("Nomenseignantencadrant")
+      item.Nomenseignantencadrant = success.data[0].nom;
+      Nomenseignantencadrant.value = item.Nomenseignantencadrant;
 
-    let PrenomduTuteurdestagedanslentreprise = document.getElementById("PrenomduTuteurDesStagesDansLentreprise")
-    PrenomduTuteurdestagedanslentreprise.value = item.PrenomduTuteurdestagedanslentreprise;
+      let Prenomenseignantencadrant = document.getElementById("Prenomenseignantencadrant")
+      item.Prenomenseignantencadrant = success.data[0].prenom;
+      Prenomenseignantencadrant.value = item.Prenomenseignantencadrant;  
+    })
 
-    let MailTuteurDesStageDansLentreprise = document.getElementById("MailTuteurDesStageDansLentreprise")
-    MailTuteurDesStageDansLentreprise.value = item.MailTuteurdestagedanslentreprise;
+    // get nom et prenom tuteur de stage  
+    userFactory.getTuteurNameById(item.idtuteur).then(success => {
+      let NomduTuteurdestagedanslentreprise = document.getElementById("NomduTuteurDesStagesDansLentreprise")
+      item.nomTuteur = success.data[0].nom;
+      NomduTuteurdestagedanslentreprise.value = item.nomTuteur
+
+      let PrenomduTuteurdestagedanslentreprise = document.getElementById("PrenomduTuteurDesStagesDansLentreprise")
+      item.prenomTuteur = success.data[0].prenom;
+      PrenomduTuteurdestagedanslentreprise.value = item.prenomTuteur  
+      
+      let MailTuteurdestagedanslentreprise = document.getElementById("MailTuteurDesStageDansLentreprise")
+      item.emailtuteur = success.data[0].emailtuteur;
+      MailTuteurdestagedanslentreprise.value = item.emailtuteur
+    })
 
     let Adressedustage = document.getElementById("Adressedustage")
-    Adressedustage.value = item.Adressedustage;
+    Adressedustage.value = item.adressestage;
 
-    let Prenomenseignantencadrant = document.getElementById("Prenomenseignantencadrant")
-    Prenomenseignantencadrant.value = item.Prenomenseignantencadrant;
+    let Annee = document.getElementById("Annee")
+    Annee.value = item.annee;
 
-    let Nomenseignantencadrant = document.getElementById("Nomenseignantencadrant")
-    Nomenseignantencadrant.value = item.Nomenseignantencadrant;
+    let Niveau = document.getElementById("Niveau")
+    Niveau.value = item.niveau;
 
     // le stage à modifier
     currentItem = item
-    //console.log(currentItem)
+    console.log(currentItem)
   }
  
+  $scope.SaveModifications = function () {
+    let titrestage = document.getElementById("Sujetdustage").value
+    let description = document.getElementById("Descriptiondustage").value
+    let nomentreprise = document.getElementById("Raisonsociale").value
+    let VilledeStage = document.getElementById("VilledeStage").value
+    let PaysdeStage = document.getElementById("PaysdeStage").value
+    let datedebut = document.getElementById("Datededebut").value
+    let datefin = document.getElementById("Datedefin").value
+    let prenomEleve = document.getElementById("PrenomEtudiant").value
+    let nomEleve = document.getElementById("NomEtudiant").value
+    let NomduTuteurdestagedanslentreprise = document.getElementById("NomduTuteurDesStagesDansLentreprise").value
+    let PrenomduTuteurdestagedanslentreprise = document.getElementById("PrenomduTuteurDesStagesDansLentreprise").value
+    let MailTuteurdestagedanslentreprise = document.getElementById("MailTuteurDesStageDansLentreprise").value
+    let Adressedustage = document.getElementById("Adressedustage").value
+    let Prenomenseignantencadrant = document.getElementById("Prenomenseignantencadrant").value
+    let Nomenseignantencadrant = document.getElementById("Nomenseignantencadrant").value
+    let Annee = document.getElementById("Annee").value
+    let Niveau = document.getElementById("Niveau").value
+
+    let newItem = currentItem;
+    // mettre a jour le stage avec les nouvelles informations
+    newItem.titrestage = titrestage
+    newItem.description = description
+    newItem.nomentreprise = nomentreprise
+    newItem.VilledeStage = VilledeStage
+    newItem.PaysdeStage = PaysdeStage
+    newItem.datedebut = datedebut
+    newItem.datefin = datefin
+    newItem.MailTuteurdestagedanslentreprise = MailTuteurdestagedanslentreprise
+    newItem.NomduTuteurdestagedanslentreprise = NomduTuteurdestagedanslentreprise
+    newItem.PrenomduTuteurdestagedanslentreprise = PrenomduTuteurdestagedanslentreprise
+    newItem.Prenomenseignantencadrant = Prenomenseignantencadrant
+    newItem.Nomenseignantencadrant = Nomenseignantencadrant
+    newItem.prenomEleve = prenomEleve
+    newItem.nomEleve = nomEleve
+    newItem.Adressedustage = Adressedustage
+    newItem.annee = Annee
+    newItem.niveau = Niveau
+
+    console.log(newItem)
+    let indexItem = $scope.stages.indexOf(currentItem);
+    $scope.stages[indexItem] = newItem
+
+    updateStage(newItem)
+    $('#modifyModal').modal('hide') 
+  }
+
+  $scope.deleteStage = function (stage) {
+    stageFactory.deleteStage(stage.idstage).then(success => {
+      toolsFactory.notifySucess('Le stages a été supprimé avec succés')
+      document.location.href="#!/rechercherStage"
+      }, error => {
+        toolsFactory.notifyFailure('Erreur, le stage n\'est pas supprimé')
+      })
+  }
+
+  updateStage = function (element) {
+      stageFactory.updateStage(element.idstage, element).then(success => {
+        toolsFactory.notifySucess('Le stage a été mis à jours avec succés')
+        $('#saveModal').modal('hide')
+      }, error => {
+        toolsFactory.notifyFailure('Erreur, Les données du stage(s) ne sont pas enregistrées')
+      })
+  }
+
+  $scope.init = function(item)
+  {
+    stageItem = item;
+    console.log(item)
+    $scope.allStagesInfosById(stageItem)
+  };
+
   $scope.checkIsAdmin()
 })

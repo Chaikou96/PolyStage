@@ -14,7 +14,7 @@ simpleApp.factory('toolsFactory', function () {
         },
 
         // Pagination 
-        setPagination: function (state,init) {
+        setPagination: function (state,initModify) {
             
             buildTable()
         
@@ -96,7 +96,7 @@ simpleApp.factory('toolsFactory', function () {
                               <td>${myList[i].nomentreprise}</td>
                               <td>${myList[i].niveau}</td>
                               <td>${myList[i].annee}</td>
-                              <td> <a href="#!/detailsDuStage" > <button ng-click="${init(myList[i])}"  class="btn btn-outline-primary ">Détails</button> </a> </td>
+                              <td> <button ng-click="${initModify(myList[i])}" class="btn btn-warning" data-toggle="modal" data-target="#modifyModal">Modifier </button> </td>
                             </tr>`
                   table.append(row)
               }

@@ -38,16 +38,19 @@ Enseignant.getEnsAuth = function (username, mdp, result) {
 };
 
 Enseignant.getEnseignantById = function (enseignantId, result) {
-    db.query("Select * from enseignants where idens = ? ", enseignantId, function (err, res) {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-        }
-        else {
-            result(null, res);
-
-        }
-    });
+    if (enseignantId) {
+        db.query("Select * from enseignants where idens = ? ", enseignantId, function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else {
+                result(null, res);
+    
+            }
+        });
+    }
+    
 };
 
 Enseignant.getEnseignantIdByNomAndPrenom = function (nom, prenom, result) {
@@ -57,7 +60,7 @@ Enseignant.getEnseignantIdByNomAndPrenom = function (nom, prenom, result) {
             result(err, null);
         }
         else {
-            console.log(res)
+            //console.log(res)
             result(null, res);
         }
     });

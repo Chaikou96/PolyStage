@@ -58,7 +58,7 @@ Tuteur.createTuteur = function (bodyForm, result) {
                 result(err, null);
             }
             if (tuteurExistant && tuteurExistant.length) {
-                db.query("UPDATE tuteurs SET ? where emailtuteur = ?", [tuteur, tuteur.emailtuteur]);
+                db.query("UPDATE tuteurs SET ? where emailtuteur = ?", [tuteur,tuteur.nom, tuteur.prenom, tuteur.emailtuteur]);
                 result(null, tuteurExistant[0].idtuteur);
             }
             else {
