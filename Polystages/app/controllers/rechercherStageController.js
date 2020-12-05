@@ -9,7 +9,8 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     'page': 1,
     'rows': 10,
     'window': 10,
-}
+  }
+  let DeleteStageItem;
   
   /* var selectElem = document.getElementById('selectorNbStages');
 
@@ -248,10 +249,10 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     $('#modifyModal').modal('hide') 
   }
 
-  $scope.deleteStage = function (stage) {
-    stageFactory.deleteStage(stage.idstage).then(success => {
+  $scope.deleteStage = function () {
+    stageFactory.deleteStage(DeleteStageItem.idstage).then(success => {
       toolsFactory.notifySucess('Le stages a été supprimé avec succés')
-      document.location.href="#!/rechercherStage"
+      $('#deleteModal').modal('hide')
       }, error => {
         toolsFactory.notifyFailure('Erreur, le stage n\'est pas supprimé')
       })
@@ -271,6 +272,13 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     stageItem = item;
     console.log(item)
     $scope.allStagesInfosById(stageItem)
+  };
+
+
+  $scope.initDeleteStage = function(item)
+  {
+    DeleteStageItem = item;
+    console.log(DeleteStageItem)
   };
 
   $scope.checkIsAdmin()

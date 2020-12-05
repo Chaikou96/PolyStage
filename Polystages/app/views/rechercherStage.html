@@ -38,9 +38,9 @@
             <td>{{stage.nomentreprise}}</td>
             <td>{{stage.niveau}}</td>
             <td>{{stage.annee}}</td>
-            <td> <button ng-click="initModify(stage)" class="btn btn-info" data-toggle="modal" data-target="#modifyModal">Détails </button> </td>
+            <td> <button ng-click="initModify(stage)" class="btn btn-info px-4" data-toggle="modal" data-target="#modifyModal"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i> </button> </td>
+            <td><button ng-click="initDeleteStage(stage)" class="btn btn-danger px-3" data-toggle="modal" data-target="#deleteModal" aria-hidden="true" ><i class="fa fa-trash fa-lg" aria-hidden="true" ></i></button></td>
           </tr>
-
         </tbody>
       </table>
       
@@ -141,3 +141,24 @@
   </div>
 </div>
 
+<!-- Confirm modal for save -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModal">Attention</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Vous êtes sur le point de supprimer ce stage de la base de données.</p>
+        <p>Etes-vous sûr de vouloir effectuer cette action ? </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Non</button>
+        <button ng-click="deleteStage()" type="button" class="btn btn-danger">Oui</button>
+      </div>
+    </div>
+  </div>
+</div>
