@@ -4,6 +4,17 @@ controllers.controller('statistiqueController', function ($scope,$rootScope, sta
       $location.path("/404")
   }
 
+  // recuperer le nom de l entreprise avec son id 
+    $scope.getNomEntreprise = function (stages) {
+      stages.forEach(element => {
+        entreprisesFactory.getEntreprisesNameById(element.identreprise)
+          .then(function (success) {
+            element.nomentreprise = success.data[0].nomcomplet
+          })
+      });
+      return stages
+    }
+
   // recuperer tous les stages
     $scope.getAllStages = function () {
       stageFactory.getAllStages()

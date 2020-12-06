@@ -1,47 +1,5 @@
 <h1 class="mt-2">Statistique des stages</h1>
-<div id="stat"></div>
-<!-- Insertion asynchrone du plugin "Chart" dans la page -->
-<script src="../js/chart.js" async></script>
-<script>
-    // Attente du chargement complet de la page
-        window.addEventListener('load', function() {
-
-            // Utilisation du plugin Chart
-            Chart({
-                  // Définition du package pour le graphique
-                  packages: ['corechart'],
-
-                  // Fonction à exécuter lorsque l'API est téléchargée
-                  callback: function() {
-
-                    // Création de la visualisation "PieChart"
-                    var chart = new google.visualization.PieChart(document.getElementById('stat'));
-
-                    // Formatage des options du graphique
-                    var options = {
-                      title : 'Titre du graphique',
-                      width : 400,
-                      height: 300
-                    };
-
-                    // Formatage des données
-                    var data = new google.visualization.DataTable();
-
-                    data.addColumn('string', 'Libellé de série');
-                    data.addColumn('number', 'Valeurs de série 1');
-                    data.addColumn('number', 'Valeurs de série 2');
-                    data.addRows([
-                      ['Valeur 1', 1, 2],
-                      ['Valeur 2', 2, 3],
-                      ['Valeur 3', 3, 4],
-                      ['Valeur 4', 4, 5],
-                      ['Valeur 5', 5, 6],
-                    ]);
-
-                    // Dessin du graphique avec les données et les options
-                    chart.draw(data, options);
-                  }
-            });
-    });
-
-  </script>
+  <button ng-click="allStagesInfosByAnnee()"  class="btn btn-primary float-lg-right">Affichage par année</button>
+<div id="stat">
+  <script type="module" src="../js/chart.js" async></script>
+</div>
