@@ -134,7 +134,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
   // le stage à modifier
   $scope.currentItem = {}
   $scope.initModify = function (item) {
-    //console.log(item)
+    console.log(item.datedebut)
     let titrestage = document.getElementById("Sujetdustage")
     titrestage.value = item.titrestage 
     let description = document.getElementById("Descriptiondustage")

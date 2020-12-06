@@ -105,6 +105,7 @@ Stage.getAllStage = function (result) {
             result(null, err);
         }
         else {
+            console.log(res)
             result(null, res);
         }
     });
@@ -275,9 +276,11 @@ Stage.createStage = function (newStage, result) {
             }
             else {
                 // formate date to YYYY/MM/DD to set into the database
-                newStage.datedebut = formatDate(newStage.datedebut)
-                newStage.datefin = formatDate(newStage.datedebut)
                 //console.log(newStage)
+                newStage.datedebut = reformatDateString(newStage.datedebut)
+                newStage.datefin = reformatDateString(newStage.datefin)
+                //newStage.datefin = formatDate(newStage.datefin)
+                console.log(newStage)
                 db.query("INSERT INTO stage set ?", newStage, function (err, res) {
                     if (err) {
                         console.log("error: ", err);
@@ -305,6 +308,11 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 
+function reformatDateString(s) {
+    var b = s.split(/\D/);
+    return b.reverse().join('-');
+  }
+
 Stage.updateStage = function (idstage, newStage, result) {
     let query = "SELECT * FROM stage WHERE idstage = ?"
     db.query(query, [idstage], function (err, stage) {
@@ -312,8 +320,8 @@ Stage.updateStage = function (idstage, newStage, result) {
             result(err, null);
         }
         if (stage && stage.length) {
-            newStage.datedebut = formatDate(newStage.datedebut)
-            newStage.datefin = formatDate(newStage.datedebut)
+            //newStage.datedebut = reformatDateString(newStage.datedebut)
+            //newStage.datefin = reformatDateString(newStage.datefin)
             db.query("UPDATE stage SET ? WHERE idstage = ?", [newStage, idstage], function (err, res) {
                 if (err) {
                     console.log("error: ", err);
