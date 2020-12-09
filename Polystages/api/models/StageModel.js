@@ -105,7 +105,7 @@ Stage.getAllStage = function (result) {
             result(null, err);
         }
         else {
-            console.log(res)
+            //console.log(res)
             result(null, res);
         }
     });
@@ -280,7 +280,7 @@ Stage.createStage = function (newStage, result) {
                 newStage.datedebut = reformatDateString(newStage.datedebut)
                 newStage.datefin = reformatDateString(newStage.datefin)
                 //newStage.datefin = formatDate(newStage.datefin)
-                console.log(newStage)
+                //console.log(newStage)
                 db.query("INSERT INTO stage set ?", newStage, function (err, res) {
                     if (err) {
                         console.log("error: ", err);

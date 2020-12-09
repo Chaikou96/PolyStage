@@ -11,6 +11,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     'window': 10,
   }
   let DeleteStageItem;
+  let hiddenButton = document.getElementById('target')
   
   /* var selectElem = document.getElementById('selectorNbStages');
 
@@ -23,9 +24,6 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
   }) */
 
   $scope.stageItem;
-  
-  
-
 
   $scope.setSearchValue = function () {
     $scope.val = document.getElementById("searchBar").value
@@ -39,6 +37,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
         $scope.stages = success.data
         $scope.getNomEntreprise($scope.stages)
         state.querySet = $scope.stages
+        hiddenButton.click();
         //toolsFactory.setPagination(state,$scope.initModify)
       }, function (error) {
         //$scope.erreurAuthentification()
@@ -46,6 +45,18 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
   }
 
   $scope.getAllStages()
+
+  pagTab = function () {
+    // Basic example
+  $(document).ready(function () {
+    $('#dtBasicExample').DataTable({
+      "paging": true // false to disable pagination (or any other option)
+    });
+    $('.dataTables_length').addClass('bs-select');
+  });
+  }
+ 
+  
 
   // recuperer les stages avec la valeur dans search bar
   $scope.allStagesBySearchValue = function (searchValue) {
@@ -134,7 +145,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
   // le stage à modifier
   $scope.currentItem = {}
   $scope.initModify = function (item) {
-    console.log(item.datedebut)
+    console.log('hello')
     let titrestage = document.getElementById("Sujetdustage")
     titrestage.value = item.titrestage 
     let description = document.getElementById("Descriptiondustage")
