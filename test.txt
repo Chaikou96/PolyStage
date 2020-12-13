@@ -1,2 +1,14 @@
 chaikou mac
 SELECT annee, COUNT(annee) as nbre_stage FROM stage GROUP BY annee
+<button ng-click="allStagesInfosByAnnee()" class="btn btn-primary float-lg-right">Affichage par année</button>
+import {affichageAnnee} from './chart.js';
+affichageAnnee();
+
+
+                 /*data.addColumn('number', 'Year');
+                 data.addColumn('number', 'Number of internships');
+                 for(let i = 0; i < 2; i++) {
+                     data.addRows([
+                         [annee.annee[i], annee.nbr_stage[i]],
+                     ]);
+                 }*/
