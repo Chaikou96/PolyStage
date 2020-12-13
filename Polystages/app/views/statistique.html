@@ -4,6 +4,11 @@
     <!-- Insertion de l'API Charts dans la page -->
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
+      var tab = [
+        ['2019', 1],
+        ['2020', 2],
+        ['2018', 4]
+      ];
       // Chargement de l'API Google Charts
       google.charts.load('current', {
 
@@ -18,24 +23,23 @@
 
           // Formatage des options du graphique
           var options = {
-            title : 'Titre du graphique',
+            title : 'Statistique par année',
             width : 400,
-            height: 300
+            height: 300,
+            is3D:true
           };
       
           // Formatage des données
           var data = new google.visualization.DataTable();
       
-          data.addColumn('string', 'Libellé de série');
-          data.addColumn('number', 'Valeurs de série 1');
-          data.addColumn('number', 'Valeurs de série 2');
-          data.addRows([
-            ['Valeur 1', 1, 2],
-            ['Valeur 2', 2, 3],
-            ['Valeur 3', 3, 4],
-            ['Valeur 4', 4, 5],
-            ['Valeur 5', 5, 6],
-          ]);
+          data.addColumn('string', 'Year');
+          data.addColumn('number', 'Number of internships');
+          for(let i = 0; i < tab.length; i++) {
+            let j = 0;
+            data.addRows([
+                [tab[i][j], tab[i][j+1]],
+            ]);
+          }
       
           // Dessin du graphique avec les données et les options
           chart.draw(data, options);
