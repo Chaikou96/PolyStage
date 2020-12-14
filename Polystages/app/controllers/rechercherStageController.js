@@ -46,16 +46,6 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
 
   $scope.getAllStages()
 
-  pagTab = function () {
-    // Basic example
-  $(document).ready(function () {
-    $('#dtBasicExample').DataTable({
-      "paging": true // false to disable pagination (or any other option)
-    });
-    $('.dataTables_length').addClass('bs-select');
-  });
-  }
- 
   
 
   // recuperer les stages avec la valeur dans search bar
@@ -257,6 +247,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     $scope.stages[indexItem] = newItem
 
     updateStage(newItem)
+
     $('#modifyModal').modal('hide') 
   }
 
@@ -272,7 +263,6 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
   updateStage = function (element) {
       stageFactory.updateStage(element.idstage, element).then(success => {
         toolsFactory.notifySucess('Le stage a été mis à jours avec succés')
-        $('#saveModal').modal('hide')
       }, error => {
         toolsFactory.notifyFailure('Erreur, Les données du stage(s) ne sont pas enregistrées')
       })
