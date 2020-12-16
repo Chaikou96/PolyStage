@@ -66,7 +66,7 @@ exports.verif_dates_stage = function (req, res) {
         var newRetard = new Retard(stage.ideleve, stage.ideleve)
         if (verif_date(stage.daterapp, stage.datelimiterendu)) newRetard["rapport"] = 1;
         if (verif_date(stage.datepres, stage.datesoutenance)) newRetard["presentation"] = 1;
-        if (verif_date(stage.dateeval, stage.datelimiteeval)) newRetard["evaluation"] = 1;
+        if (verif_date(stage.dateeval, stage.datelimiteeval)) newRetard["autoeval"] = 1;         // remplacer evaluation par autoeval car evaluation n'existe pas dans le tableau retardeleve dans la bdd
         if (newRetard.rapport || newRetard.presentation || newRetard.evaluation) Retard.updateRetardEleve(newRetard);
       }
     }

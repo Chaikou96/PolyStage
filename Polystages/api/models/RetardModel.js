@@ -30,8 +30,9 @@ Retard.updateRetardEleve = function (retard) {
         }
         else {
             if (res && res.length) {
+                console.log(retard)
                 let update = "UPDATE retardeleve SET ? WHERE ideleve = ?";
-                db.query(update, [retard, res], function (err, newRetard) {
+                db.query(update, [retard, res[0].ideleve], function (err, newRetard) {
                     if (err) {
                         console.log("error: ", err);
                     }
