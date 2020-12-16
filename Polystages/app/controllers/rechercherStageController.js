@@ -135,7 +135,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
   // le stage à modifier
   $scope.currentItem = {}
   $scope.initModify = function (item) {
-    console.log('hello')
+    //console.log('hello')
     let titrestage = document.getElementById("Sujetdustage")
     titrestage.value = item.titrestage 
     let description = document.getElementById("Descriptiondustage")
@@ -147,9 +147,9 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
     let PaysdeStage = document.getElementById("PaysdeStage")
     PaysdeStage.value = item.PaysdeStage;
     let datedebut = document.getElementById("Datededebut")
-    datedebut.value = item.datedebut;
+    datedebut.value = item.datedebut.substring(0,10);                 // à fin de recuperer que la date YYYY-MM-DD
     let datefin = document.getElementById("Datedefin")
-    datefin.value = item.datefin;
+    datefin.value = item.datefin.substring(0,10);
 
     // get nom and prenom eleve with his id 
     userFactory.getEleveNameById(item.ideleve).then(success => {
@@ -200,7 +200,7 @@ controllers.controller('rechercherStageController', function ($scope,$rootScope,
 
     // le stage à modifier
     currentItem = item
-    console.log(currentItem)
+    //console.log(currentItem)
   }
  
   $scope.SaveModifications = function () {
