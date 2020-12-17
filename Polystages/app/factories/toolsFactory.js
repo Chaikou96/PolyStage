@@ -1,6 +1,6 @@
 simpleApp.factory("toolsFactory", function () {
   return {
-    // ce document contient les fonction qu'on utlise dans notre application comme notification et pagination
+    // ce document contient les tools  comme notification et pagination
 
     // Notification
     notifySucess: function (msg) {
@@ -14,94 +14,140 @@ simpleApp.factory("toolsFactory", function () {
     },
 
     // Pagination
-    setPagination: function (state, initModify) {
-      buildTable();
+    setPagination: function (data, modify, DeleteStage) {
+      const list_items = data;
 
-      function pagination(querySet, page, rows) {
-        var trimStart = (page - 1) * rows;
-        var trimEnd = trimStart + rows;
+      const list_element = document.getElementById("list");
+      const pagination_element = document.getElementById("pagination");
 
-        var trimmedData = querySet.slice(trimStart, trimEnd);
+      let current_page = 1;
+      let rows = 5;
 
-        var pages = Math.round(querySet.length / rows);
+      DisplayList = function (items, wrapper, rows_per_page, page) {
+        //wrapper.innerHTML = "";
+        page--;
 
-        return {
-          querySet: trimmedData,
-          pages: pages,
-        };
-      }
+        let start = rows_per_page * page;
+        let end = start + rows_per_page;
+        let paginatedItems = items.slice(start, end);
 
-      function pageButtons(pages) {
-        var wrapper = document.getElementById("pagination-wrapper");
+        let tab = document.getElementById("table-body");
 
-        wrapper.innerHTML = ``;
+        $("#table-body").empty();
 
-        var maxLeft = state.page - Math.floor(state.window / 2);
-        var maxRight = state.page + Math.floor(state.window / 2);
+        for (var c = 0; c < paginatedItems.length; c++) {
+          let stage = paginatedItems[c];
+          console.log(stage);
 
-        if (maxLeft < 1) {
-          maxLeft = 1;
-          maxRight = state.window;
+          var rowCnt = tab.rows.length; // table row count.
+          var tr = tab.insertRow(rowCnt); // the table row.
+          tr = tab.insertRow(rowCnt);
+
+          let idstage = stage.idstage;
+
+          var tabItems = [
+            c + 1,
+            stage.titrestage,
+            stage.description,
+            stage.niveau,
+            stage.annee,
+          ];
+
+          tabItems.forEach((element, key) => {
+            let td = document.createElement("td"); // table definition.
+            td = tr.insertCell(key);
+            // 2nd, 3rd and 4th column, will have textbox.
+            console.log(element);
+            var para = document.createElement("p");
+            var node = document.createTextNode(`${element}`);
+            para.appendChild(node);
+            td.appendChild(para);
+          });
+          // the first column.
+          // add a button in every new row in the first column.
+
+          let td = document.createElement("td"); // table definition.
+          td = tr.insertCell(tabItems.length);
+
+          var button = document.createElement("button");
+
+          // set input attributes.
+          button.setAttribute("type", "button");
+          //button.setAttribute("value", "Modifier");
+          button.setAttribute("class", "btn btn-info px-4");
+          button.setAttribute("data-target", "#modifyModal");
+          button.setAttribute("data-toggle", "modal");
+          button.innerHTML =
+            '<i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>';
+
+          // add button's 'onclick' event.
+          button.setAttribute("onclick", `initModify(${idstage})`);
+
+          td.appendChild(button);
+          // the first column.
+          // add a button in every new row in the first column.
+
+          //td = tr.insertCell(tabItems.length+1);
+          let supprimerbtn = document.createElement("button");
+
+          // set input attributes.
+          supprimerbtn.setAttribute("type", "button");
+          supprimerbtn.setAttribute("value", "Supprimer");
+          supprimerbtn.setAttribute("class", "btn btn-danger px-3");
+          supprimerbtn.setAttribute("data-target", "#deleteModal");
+          supprimerbtn.setAttribute("data-toggle", "modal");
+          supprimerbtn.setAttribute("aria-hidden", "true");
+          supprimerbtn.innerHTML =
+            '<i class="fa fa-trash fa-lg" aria-hidden="true" ></i>';
+
+          // add supprimerbtn's 'onclick' event.
+          supprimerbtn.setAttribute("onclick", `initDeleteStage(${idstage})`);
+
+          td.appendChild(supprimerbtn);
         }
+      };
 
-        if (maxRight > pages) {
-          maxLeft = pages - (state.window - 1);
+      SetupPagination = function (items, wrapper, rows_per_page) {
+        wrapper.innerHTML = "";
 
-          if (maxLeft < 1) {
-            maxLeft = 1;
-          }
-          maxRight = pages;
+        let page_count = Math.ceil(items.length / rows_per_page);
+        for (let i = 1; i < page_count + 1; i++) {
+          let btn = PaginationButton(i, items);
+          wrapper.appendChild(btn);
         }
+      };
 
-        for (var page = maxLeft; page <= maxRight; page++) {
-          wrapper.innerHTML += `<button value=${page} class="page btn btn-sm btn-info">${page}</button>`;
-        }
+      PaginationButton = function (page, items) {
+        let button = document.createElement("button");
+        button.innerText = page;
 
-        if (state.page != 1) {
-          wrapper.innerHTML =
-            `<button value=${1} class="page btn btn-sm btn-info">&#171; First</button>` +
-            wrapper.innerHTML;
-        }
+        if (current_page == page) button.classList.add("active");
 
-        if (state.page != pages) {
-          wrapper.innerHTML += `<button value=${pages} class="page btn btn-sm btn-info">Last &#187;</button>`;
-        }
+        button.addEventListener("click", function () {
+          current_page = page;
+          DisplayList(items, list_element, rows, current_page);
 
-        $(".page").on("click", function () {
-          $("#table-body").empty();
+          let current_btn = document.querySelector(
+            ".pagenumbers button.active"
+          );
+          current_btn.classList.remove("active");
 
-          state.page = Number($(this).val());
-
-          buildTable();
+          button.classList.add("active");
         });
-      }
 
-      function buildTable() {
-        var table = $("#table-body");
+        return button;
+      };
 
-        //$('#table-body').empty()
+      initModify = function (idstage) {
+        modify(idstage);
+      };
 
-        var data = pagination(state.querySet, state.page, state.rows);
-        var myList = data.querySet;
+      initDeleteStage = function (idstage) {
+        DeleteStage(idstage);
+      };
 
-        for (var i = 1 in myList) {
-          let stage = myList[i];
-          //console.log(stage)
-          //Keep in mind we are using "Template Litterals to create rows"
-          let row = ` <tr>
-                              <th scope="row">${i}</th>
-                              <td>${stage.titrestage}</td>
-                              <td>${stage.description}</td>
-                              <td>${stage.nomentreprise}</td>
-                              <td>${stage.niveau}</td>
-                              <td>${stage.annee}</td>
-                            </tr>`;
-          table.append(row);
-        }
-
-        pageButtons(data.pages);
-        delete myList;
-      }
+      DisplayList(list_items, list_element, rows, current_page);
+      SetupPagination(list_items, pagination_element, rows);
     },
   };
 });
