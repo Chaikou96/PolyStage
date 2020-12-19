@@ -110,11 +110,11 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
     let Datedefin = document.getElementById("Datedefin")
     Datedefin.value = item.Datedefin;
 
-    let NomEtudiant = document.getElementById("NomEtudiant")
-    NomEtudiant.value = item.Nomdeleleve;
+    let Nomdeleleve = document.getElementById("NomEtudiant")
+    Nomdeleleve.value = item.Nomdeleleve;
 
-    let PrenomEtudiant = document.getElementById("PrenomEtudiant")
-    PrenomEtudiant.value = item.Prenomdeleleve;
+    let Prenomdeleleve = document.getElementById("PrenomEtudiant")
+    Prenomdeleleve.value = item.Prenomdeleleve;
 
     let NomduTuteurdestagedanslentreprise = document.getElementById("NomduTuteurDesStagesDansLentreprise")
     NomduTuteurdestagedanslentreprise.value = item.NomduTuteurdestagedanslentreprise;
@@ -146,8 +146,8 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
     let PaysdeStage = document.getElementById("PaysdeStage").value
     let Datededebut = document.getElementById("Datededebut").value
     let Datedefin = document.getElementById("Datedefin").value
-    let PrenomEtudiant = document.getElementById("PrenomEtudiant").value
-    let NomEtudiant = document.getElementById("NomEtudiant").value
+    let Prenomdeleleve = document.getElementById("PrenomEtudiant").value
+    let Nomdeleleve = document.getElementById("NomEtudiant").value
     let NomduTuteurdestagedanslentreprise = document.getElementById("NomduTuteurDesStagesDansLentreprise").value
     let PrenomduTuteurdestagedanslentreprise = document.getElementById("PrenomduTuteurDesStagesDansLentreprise").value
     let MailTuteurDesStageDansLentreprise = document.getElementById("MailTuteurDesStageDansLentreprise").value
@@ -168,8 +168,8 @@ controllers.controller('ajouterStageController', function ($scope,$rootScope, st
     newItem.PrenomduTuteurdestagedanslentreprise = PrenomduTuteurdestagedanslentreprise
     newItem.Prenomenseignantencadrant = Prenomenseignantencadrant
     newItem.Nomenseignantencadrant = Nomenseignantencadrant
-    newItem.PrenomEtudiant = PrenomEtudiant
-    newItem.NomEtudiant = NomEtudiant
+    newItem.Prenomdeleleve = Prenomdeleleve
+    newItem.Nomdeleleve = Nomdeleleve
     newItem.Adressedustage = Adressedustage
 
     console.log(newItem)
