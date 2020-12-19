@@ -149,6 +149,8 @@ controllers.controller(
         if (element.idstage === idstage) item = element;
       });
 
+      console.log(item)
+
       let titrestage = document.getElementById("Sujetdustage");
       titrestage.value = item.titrestage;
       let description = document.getElementById("Descriptiondustage");
@@ -156,9 +158,9 @@ controllers.controller(
       let nomentreprise = document.getElementById("Raisonsociale");
       nomentreprise.value = item.nomentreprise;
       let VilledeStage = document.getElementById("VilledeStage");
-      VilledeStage.value = item.VilledeStage;
+      VilledeStage.value = item.Ville;
       let PaysdeStage = document.getElementById("PaysdeStage");
-      PaysdeStage.value = item.PaysdeStage;
+      PaysdeStage.value = item.Pays;
       let datedebut = document.getElementById("Datededebut");
       datedebut.value = item.datedebut.substring(0, 10); // à fin de recuperer que la date YYYY-MM-DD
       let datefin = document.getElementById("Datedefin");

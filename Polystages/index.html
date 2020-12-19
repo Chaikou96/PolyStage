@@ -40,12 +40,12 @@
                                 <i class="fa fa-cogs text-primary"></i> &nbsp; Administration
                             </a>
                         </li>
-                        <li>
+                        <li ng-if="$root.admin == 1">
                             <a class="collapsible-header waves-effect arrow-r" href="#!/ajouterStage">
                                 <i class="fa fa-plus-square-o text-primary"></i> &nbsp; Ajouter des stages
                             </a>
                         </li>
-                        <li>
+                        <li ng-if="$root.admin == 1">
                             <a class="collapsible-header waves-effect arrow-r" href="#!/rechercherStage">
                                 <i class="fa fa-search text-primary"></i> &nbsp; Rechercher un stage
                             </a>

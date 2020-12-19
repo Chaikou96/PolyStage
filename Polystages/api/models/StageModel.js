@@ -24,8 +24,8 @@ var Stage = function (stage, idtuteur) {
 
 //Task object constructor
 Stage.StageCsv = function (stage, idtuteur) {
-    console.log("stageCsv")
-    console.log(stage)
+    //console.log("stageCsv")
+    //console.log(stage)
     let stageObj = {
         niveau : stage.Niveau,
         annee : stage.Annee,
@@ -37,28 +37,19 @@ Stage.StageCsv = function (stage, idtuteur) {
         titrestage : stage.Sujetdustage,
         description: stage.Description,
         ideleve: stage.ideleve,
-        //'adremailstage' : stage.adremailstage,
-        adressestage : stage.Adressedustage
-        //'cheminrapport': stage.cheminrapport,
-        //'cheminpres': stage.cheminpres,
-        //'chemineval': stage.cheminval,
-        //'dateeval': stage.dateeval,
-        //'evallancee': stage.evallancee,
-        //'confidentiel': stage.confidentiel,
-        //'datelimiterendu': stage.datelimiterendu,
-        //'datelimiteeval': stage.datalimiteeval,
-        //'datesoutenance': stage.datesoutenance,
-        //'datecomp': stage.datecomp,
-        //'chemincomp': stage.chemincomp
+        //adremailstage : stage.adremailstage,
+        adressestage : stage.Adressedustage,
+        Ville : stage.VilledeStage,
+        Pays : stage.PaysdeStage
     }
-    console.log('sortie constructuer stageCsv')
-    console.log(stageObj)
+    //console.log('sortie constructuer stageCsv')
+    //console.log(stageObj)
     return stageObj;
 };
 
 Stage.upadteStageConst = function (stage, idtuteur) {
-    console.log("upadteStageConst")
-    console.log(stage)
+    //console.log("upadteStageConst")
+    //console.log(stage)
     let stageObj = {
         niveau : stage.niveau,
         annee : stage.annee,
@@ -70,22 +61,13 @@ Stage.upadteStageConst = function (stage, idtuteur) {
         titrestage : stage.titrestage,
         description: stage.description,
         ideleve: stage.ideleve,
-        //'adremailstage' : stage.adremailstage,
-        adressestage : stage.adressestage
-        //'cheminrapport': stage.cheminrapport,
-        //'cheminpres': stage.cheminpres,
-        //'chemineval': stage.cheminval,
-        //'dateeval': stage.dateeval,
-        //'evallancee': stage.evallancee,
-        //'confidentiel': stage.confidentiel,
-        //'datelimiterendu': stage.datelimiterendu,
-        //'datelimiteeval': stage.datalimiteeval,
-        //'datesoutenance': stage.datesoutenance,
-        //'datecomp': stage.datecomp,
-        //'chemincomp': stage.chemincomp
+        //adremailstage : stage.adremailstage,
+        adressestage : stage.adressestage,
+        Ville : stage.VilledeStage,
+        Pays : stage.PaysdeStage
     }
-    console.log('sortie constructuer upadteStageConst')
-    console.log(stageObj)
+    //console.log('sortie constructuer upadteStageConst')
+    //console.log(stageObj)
     return stageObj;
 };
 
