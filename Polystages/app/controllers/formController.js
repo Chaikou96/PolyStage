@@ -1,7 +1,7 @@
 controllers.controller('formController', function ($scope, $rootScope, questionsFactory, entreprisesFactory, enseignantsFactory, stageFactory, $location) {
   $scope.createStage = function (idEleve, nometu, prenometu, annee, niveau, idenseignant, nomtuteur, prenomtuteur, emailtuteur, identreprise,
-    adresseentreprise, titrestage, descriptionstage, emailstage, debutstage, finstage) {
-    if ($scope.isValid(idEleve, nometu, prenometu, annee, niveau, identreprise, titrestage, debutstage, finstage)) {
+    adresseentreprise, titrestage, descriptionstage, emailstage, debutstage, finstage, ville, pays) {
+    if ($scope.isValid(idEleve, nometu, prenometu, annee, niveau, identreprise, titrestage, debutstage, finstage, ville, pays)) {
       var data = {}
       data.idEleve = idEleve
       data.nometu = nometu
@@ -19,6 +19,8 @@ controllers.controller('formController', function ($scope, $rootScope, questions
       data.emailstage = emailstage
       data.debutstage = moment(debutstage, 'DD/MM/YYYY').format('YYYY-MM-DD')
       data.finstage = moment(finstage, 'DD/MM/YYYY').format('YYYY-MM-DD')
+      data.ville = ville
+      data.pays = pays
 
       stageFactory.createStage(data).then(success => {
         $location.path("/home")
@@ -29,9 +31,11 @@ controllers.controller('formController', function ($scope, $rootScope, questions
     }
   }
 
-  $scope.isValid = function (idEleve, nometu, prenometu, annee, niveau, identreprise, titrestage, debutstage, finstage) {
+  $scope.isValid = function (idEleve, nometu, prenometu, annee, niveau, identreprise, titrestage, debutstage, finstage, ville, pays) {
     var res = false
-    if (idEleve && nometu && prenometu && annee && niveau && identreprise && titrestage && debutstage && finstage)
+    console.log(titrestage)
+    console.log(ville)
+    if (idEleve && nometu && prenometu && annee && niveau && identreprise && titrestage && debutstage && finstage && ville && pays)
       res = true
     else
       toastr.error("Veuillez remplir tous les champs obligatoires")

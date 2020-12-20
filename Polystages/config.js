@@ -10,8 +10,8 @@ const config = {
     password: 'root'
   },
   gmail: {
-    user: 'aymendamak2@gmail.com',
-    mdp: '...'
+    user: 'polystage.alert@gmail.com',
+    mdp: 'bilodu13'
   }
 };
 

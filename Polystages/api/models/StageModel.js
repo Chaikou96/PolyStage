@@ -20,12 +20,12 @@ var Stage = function (stage, idtuteur) {
     this.description = stage.descriptionstage;
     this.adremailstage = stage.emailstage;
     this.adressestage = stage.adresseentreprise;
+    this.Ville = stage.ville;
+    this.Pays = stage.pays;
 };
 
 //Task object constructor
 Stage.StageCsv = function (stage, idtuteur) {
-    //console.log("stageCsv")
-    //console.log(stage)
     let stageObj = {
         niveau : stage.Niveau,
         annee : stage.Annee,
@@ -42,14 +42,10 @@ Stage.StageCsv = function (stage, idtuteur) {
         Ville : stage.VilledeStage,
         Pays : stage.PaysdeStage
     }
-    //console.log('sortie constructuer stageCsv')
-    //console.log(stageObj)
     return stageObj;
 };
 
 Stage.upadteStageConst = function (stage, idtuteur) {
-    //console.log("upadteStageConst")
-    //console.log(stage)
     let stageObj = {
         niveau : stage.niveau,
         annee : stage.annee,
@@ -66,8 +62,6 @@ Stage.upadteStageConst = function (stage, idtuteur) {
         Ville : stage.VilledeStage,
         Pays : stage.PaysdeStage
     }
-    //console.log('sortie constructuer upadteStageConst')
-    //console.log(stageObj)
     return stageObj;
 };
 
@@ -259,10 +253,35 @@ Stage.createStage = function (newStage, result) {
             else {
                 // formate date to YYYY/MM/DD to set into the database
                 //console.log(newStage)
-                newStage.datedebut = reformatDateString(newStage.datedebut)
-                newStage.datefin = reformatDateString(newStage.datefin)
+                newStage.datedebut = formatDate(newStage.datedebut)
+                newStage.datefin = formatDate(newStage.datefin)
                 //newStage.datefin = formatDate(newStage.datefin)
                 //console.log(newStage)
+                db.query("INSERT INTO stage set ?", newStage, function (err, res) {
+                    if (err) {
+                        console.log("error: ", err);
+                        result(err, null);
+                    }
+                    else {
+                        result(null, 200);
+                    }
+                });
+            }
+        })
+};
+
+Stage.createStageFromCsv = function (newStage, result) {
+    db.query("Select * from stage where ideleve = ? AND annee = ?",
+        [newStage.ideleve, newStage.annee], function (err, stage) {
+            if (err) {
+                result(err, null);
+            }
+            if (stage && stage.length) {
+                result(null, 409);
+            }
+            else {
+                newStage.datedebut = reformatDateString(newStage.datedebut)
+                newStage.datefin = reformatDateString(newStage.datefin)
                 db.query("INSERT INTO stage set ?", newStage, function (err, res) {
                     if (err) {
                         console.log("error: ", err);

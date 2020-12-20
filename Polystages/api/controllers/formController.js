@@ -85,7 +85,7 @@ exports.FormEleveCsv = function (req, res) {
       var idtuteur = result
       //Crée le stage
       var new_stage = new Stage(req.body, idtuteur);
-      Stage.createStage(new_stage, function (err, result) {
+      Stage.createStageFromCsv(new_stage, function (err, result) {
         if (err)
           res.status(500).send(err);
         if (result && result.length) {
@@ -96,7 +96,7 @@ exports.FormEleveCsv = function (req, res) {
   } else {
     console.log('hello there')
     let new_stage = Stage.StageCsv(req.body, 0);
-    Stage.createStage(new_stage, function (err, result) {
+    Stage.createStageFromCsv(new_stage, function (err, result) {
       if (err) res.status(500).send(err);
       res.status(result).send();
     })

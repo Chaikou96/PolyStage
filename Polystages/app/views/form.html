@@ -16,7 +16,7 @@
 <div ng-if="$root.role == 'eleve'">
     <h1 class="mt-2">Enregistrement du stage de {{ $root.niveau }}e année</h1>
     <form ng-submit="createStage($root.idEleve, $root.nom, $root.prenom, $root.annee, $root.niveau, idenseignant, nomtuteur, prenomtuteur, emailtuteur, identreprise, 
-    adresseentreprise, titrestage, descriptionstage, emailstage, debutstage, finstage)" name="formeleve" novalidate>
+    adresseentreprise, titrestage, descriptionstage, emailstage, debutstage, finstage, ville, pays)" name="formeleve" novalidate>
         <h3 class="title-form">Stagiaire</h3>
         <div class="md-form my-3">
             <input type="text" id="nomstagiaire" class="form-control" ng-model="$root.nom" disabled>
@@ -88,6 +88,14 @@
             <input placeholder="Selectionner la date" type="text" id="finstage" class="form-control datepicker"
                 ng-model="finstage">
             <label for="finstage" class="active">Fin du stage <span class="text-danger">*</span></label>
+        </div>
+        <div class="md-form my-3">
+            <input type="text" id="ville" class="form-control" ng-model="ville">
+            <label for="ville">Ville du stage <span class="text-danger">*</span></label>
+        </div>
+        <div class="md-form my-3">
+            <input type="text" id="pays" class="form-control" ng-model="pays">
+            <label for="pays">Pays du stage <span class="text-danger">*</span></label>
         </div>
         <button type="submit" class="btn btn-primary float-right mx-0">Enregistrer mon stage</button>
     </form>

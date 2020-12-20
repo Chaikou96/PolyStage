@@ -31,12 +31,13 @@
                 <div class="row">
                     <div class="col-md-6 mb-2">
                         <div class="file-field">
-                            <div class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect uploadRapport"
-                                ng-class="{'disabled-btn': isRapportUploaded || stage.cheminrapport}">
-                                <span>Télécharger rapport</span>
+                            <div class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect uploadRapport">
+                                <!-- Ajouter la possibilité de retélécharger un autre stage -->
+                                <span ng-if="stage.cheminrapport == null">Télécharger rapport</span>
+                                <span ng-if="stage.cheminrapport != null">ReTélécharger rapport</span> 
                                 <input type="file" ng-model="rapportFile"
                                     ngf-select="uploadRapport(rapportFile, $root.annee, $root.niveau, $root.nom, $root.prenom, stage.idstage, $root.email)"
-                                    name="file" accept=".pdf" ng-disabled="isRapportUploaded || stage.cheminrapport">
+                                    name="file" accept=".pdf" />
                             </div>
                             <a ng-href="{{ stage.cheminrapport }}"
                                 class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect" target="_blank"
@@ -46,12 +47,12 @@
                     </div>
                     <div class="col-md-6">
                         <div class="file-field">
-                            <div class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect uploadPres"
-                                ng-class="{'disabled-btn': isPresUploaded || stage.cheminpres}">
-                                <span>Télécharger présentation</span>
+                            <div class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect uploadPres">
+                                <span ng-if="stage.cheminpres == null" >Télécharger présentation</span>
+                                <span ng-if="stage.cheminpres != null" >ReTélécharger présentation</span>
                                 <input type="file" ng-model="presFile"
                                     ngf-select="uploadPres(presFile, $root.annee, $root.niveau, $root.nom, $root.prenom, stage.idstage, $root.email)"
-                                    name="file" accept=".pdf, .pptx" ng-disabled="isPresUploaded || stage.cheminpres">
+                                    name="file" accept=".pdf, .pptx" >
                             </div>
                             <a ng-href="{{ stage.cheminpres }}"
                                 class="btn btn-outline-primary w-100 m-0 py-1 px-2 h-100 waves-effect" target="_blank"
