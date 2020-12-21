@@ -76,6 +76,47 @@ controllers.controller('homeController', function ($scope, $rootScope, stageFact
     })
   }
 
+  $scope.lancerAllEvaluation = function () {
+
+    let idstage
+    let nom
+    let prenom
+    let idtuteur
+
+    $scope.stages.forEach(stage => {
+      if(!stage.evallancee){
+        idstage = stage.idstage
+        idtuteur = stage.idtuteur
+        nom = stage.nom
+        prenom = stage.prenom
+        const datetime = new Date().toLocaleString('fr-FR')
+        data = { idstage, idtuteur, nom, prenom, datetime }
+        mailsFactory.sendEvalAlert(data).then(success => {
+          toastr.success("L'évaluation a bien été lancée")
+          stageFactory.getEnsStages($rootScope.idEns).then(success => {
+            $scope.stages = success.data
+            isAllEvaluated();
+          }, error => {
+            console.log(error)
+          })
+        }, error => {
+          toastr.error('Une erreur est survenue')
+        })
+      }  
+    }); 
+  }
+
+  isAllEvaluated = function() {
+    $scope.isAllEvaluated = true;
+    $scope.stages.forEach(stage => {
+      console.log(stage)
+      if(stage.evallancee == null){
+        $scope.isAllEvaluated = false
+        return
+      }
+    })
+  }
+
   $scope.evaluer = function (idstage) {
     $location.path("/evaluation/stage/" + idstage)
   }
