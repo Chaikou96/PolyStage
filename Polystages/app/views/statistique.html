@@ -1,7 +1,10 @@
 <h1 class="mt-2">Statistique des stages</h1>
 <div class="md-form mt-0">
-  <div id="stat">
-    <!-- Insertion de l'API Charts dans la page -->
+  <div id="stat"></div>
+  <div ng-click="allStagesInfosByAnnee()">
+    <p>COUCOU {{ stage.annee }}</p>
+  </div>
+    <!-- Insertion de l'API Charts dans la page 
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
       var tab = [
@@ -46,6 +49,5 @@
       
         }
       });
-    </script>
-  </div>
+    </script>  -->
 </div>
