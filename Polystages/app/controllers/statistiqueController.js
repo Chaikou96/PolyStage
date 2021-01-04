@@ -1,4 +1,4 @@
-controllers.controller('statistiqueController', function ($scope,$rootScope, stageFactory, userFactory, entreprisesFactory, $location) {
+controllers.controller('statistiqueController', function ($scope,$rootScope, stageFactory, userFactory, entreprisesFactory, statistiqueFactory, $location) {
   $scope.checkIsAdmin = function () {
     if ($rootScope.admin != 1)
       $location.path("/404")
@@ -31,9 +31,12 @@ controllers.controller('statistiqueController', function ($scope,$rootScope, sta
     $scope.allStagesInfosByAnnee = function () {
         stageFactory.getStageByAnnee()
         .then(function (success) {
-            $scope.annee = success.data[0].annee
+            $scope.annee = success.data
+            statistiqueFactory.getGraphe($scope.annee)
         })
     }
+  $scope.allStagesInfosByAnnee()
+
 
   $scope.checkIsAdmin()
 })
