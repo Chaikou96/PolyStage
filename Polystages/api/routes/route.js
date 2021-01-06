@@ -14,7 +14,7 @@ module.exports = function (app) {
   
   app.route('/entreprises')
     .get(EntrepriseControlleur.list_all_entreprises)
-    .post(EntrepriseControlleur.create_entreprise);
+    .post(EntrepriseControlleur.create_entreprise); //manquante dans doc
   
   app.route('/entreprises/ById/:identreprise')
     .get(EntrepriseControlleur.get_entreprise_name_by_id)
@@ -72,12 +72,6 @@ module.exports = function (app) {
   app.route('/stagesInfosById/:idstage')
     .get(StageControlleur.list_stage_InfosbyId)
 
-  app.route('/deleteStage/:idstage')
-    .get(StageControlleur.delete_stage_by_id)
-  
-  app.route('/stages/byIdEleve/:ideleve')
-    .get(StageControlleur.list_stage_byeleveId);
-  
   app.route('/stages/byVal/:val')
     .get(StageControlleur.list_stage_byVal);
 
@@ -87,7 +81,14 @@ module.exports = function (app) {
 
   app.route('/stages/evalcompetences/:idstage')
     .post(FormControlleur.FormComp);
+   
+  app.route('/stages/byIdEleve/:ideleve')
+    .get(StageControlleur.list_stage_byeleveId);
 
+  app.route('/deleteStage/:idstage')
+    .get(StageControlleur.delete_stage_by_id)
+
+  
   app.route('/current/eleve/stage')
     .get(StageControlleur.current_stage);
 

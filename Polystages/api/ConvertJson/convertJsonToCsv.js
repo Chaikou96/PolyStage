@@ -17,6 +17,8 @@ exports.convertAllStagesJsonToCsv = function (req, res) {
   let stagesInfo = []
   let stages = ''
 
+
+
   
   //let stagesData = helloFunction(tabStageId, stages)
 
@@ -57,7 +59,6 @@ exports.convertOneStageJsonToCsv = function (req, res) {
           if (err) {
             res.send(err)
           }
-
           // write CSV to a file
         fs.writeFileSync('stages.csv', csv);
         res.send(data);

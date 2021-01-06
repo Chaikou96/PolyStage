@@ -63,6 +63,7 @@ controllers.controller(
 
     // fonction pour la conversion du stage ( json to csv )
     $scope.oneStageJsonToCsv = function (data) {
+      console.log(data)
       convertJsonFactory.convertOneStageJsonToCsv(data).then(
         (success) => {
           toolsFactory.notifySucess("Fichier téléchargé avec succés");
@@ -77,7 +78,9 @@ controllers.controller(
     };
 
     $scope.allStagesJsonToCsv = function (data) {
+      //console.log(data)
       let allStageId = getAllStagesId(data);
+      //console.log(allStageId)
       convertJsonFactory.convertAllStagesJsonToCsv(allStageId).then(
         (success) => {
           toolsFactory.notifySucess("Fichier téléchargé avec succés");

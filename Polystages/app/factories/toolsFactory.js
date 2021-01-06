@@ -37,7 +37,7 @@ simpleApp.factory("toolsFactory", function () {
 
         for (var c = 0; c < paginatedItems.length; c++) {
           let stage = paginatedItems[c];
-          console.log(stage);
+          //console.log(stage);
 
           var rowCnt = tab.rows.length; // table row count.
           var tr = tab.insertRow(rowCnt); // the table row.
@@ -57,7 +57,7 @@ simpleApp.factory("toolsFactory", function () {
             let td = document.createElement("td"); // table definition.
             td = tr.insertCell(key);
             // 2nd, 3rd and 4th column, will have textbox.
-            console.log(element);
+            //console.log(element);
             var para = document.createElement("p");
             var node = document.createTextNode(`${element}`);
             para.appendChild(node);
