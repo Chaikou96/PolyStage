@@ -84,6 +84,14 @@ exports.list_stage_byAnnee = function (req, res) {
   })
 }
 
+exports.list_stage_byLevel = function (req, res) {
+  Stage.getStageByLevel(function (err, stage) {
+    if (err)
+      res.send(err);
+    res.send(stage);
+  })
+}
+
 
 exports.list_stage_byIdForEval = function (req, res) {
   Stage.getStageByIdForEval(req.params.idstage, function (err, stage) {

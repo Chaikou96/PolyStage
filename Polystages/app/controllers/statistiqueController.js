@@ -32,10 +32,22 @@ controllers.controller('statistiqueController', function ($scope,$rootScope, sta
         stageFactory.getStageByAnnee()
         .then(function (success) {
             $scope.annee = success.data
-            statistiqueFactory.getGraphe($scope.annee)
+            statistiqueFactory.getGrapheYear($scope.annee)
         })
     }
-  $scope.allStagesInfosByAnnee()
+    $scope.allStagesInfosByAnnee()
+
+  // recuperer les stages effectués par niveau
+    $scope.allStagesInfosByLevel = function () {
+      stageFactory.getStageByLevel()
+      .then(function (success) {
+          //console.log(success)
+          $scope.niveau = success.data
+          //console.log($scope.niveau)
+          statistiqueFactory.getGrapheLevel($scope.niveau)
+      })
+    }
+    $scope.allStagesInfosByLevel()
 
 
   $scope.checkIsAdmin()

@@ -72,6 +72,19 @@ Stage.getStageByAnnee = function (result) {
     });
 }
 
+Stage.getStageByLevel = function (result) {
+    var query = "SELECT niveau, COUNT(niveau) as nbre FROM stage GROUP BY niveau"
+    db.query(query, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else {
+            result(null, res);
+        }
+    });
+}
+
 Stage.getStageByIdForEval = function (idstage, result) {
     var query = "Select * from stage natural join eleves left join entreprise on entreprise.identreprise = stage.identreprise where idstage = ?"
     db.query(query, idstage, function (err, res) {

@@ -40,8 +40,11 @@ module.exports = function (app) {
     .get(StageControlleur.list_all_stages);
 
 //MMM
-  app.route('/statistique')
+  app.route('/statistique/1')
     .get(StageControlleur.list_stage_byAnnee);
+  
+  app.route('/statistique/2')
+    .get(StageControlleur.list_stage_byLevel);
   
   app.route('/stages/update')
     .get(MailControlleur.verif_dates_stage);

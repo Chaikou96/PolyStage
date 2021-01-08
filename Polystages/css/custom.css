@@ -133,6 +133,15 @@
     top: 0;
 }
 
+/* statistique */
+div#statYear {
+    float: left;
+    width: 300px;
+}
+div#statLevel {
+    float: right;
+}
+
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
     .img-404{
