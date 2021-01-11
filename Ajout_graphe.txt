@@ -1,0 +1,9 @@
+mode d'emploi pour ajouter un graphe
+_ on rajoute dans le fichier api/models/StageModel.js une fonction qui traitera la requête qui permettra de récupérer les données dans la BDD
+_ on rajoute dans le fichier app/controllers/statistiqueController.js une fonction qui lancera la création du script du graphe par rapport aux données qu'on veut
+_ on rajoute dans le fichier app/factories/stageFactory.js la fonction qui retourne l'adresse http de notre fonction
+_ dans le fichier app/factories/statistiqueFactory.js on créer le script qui fera le graphe
+_ dans le fichier api/controllers/stageController.js on exporte la fonction qui traite notre requête
+_ dans le fichier api/routes/route.js on rajoute la route de notre nouveau graphe
+_ Ainsi dans le fichier html on fait appel au script.
+
