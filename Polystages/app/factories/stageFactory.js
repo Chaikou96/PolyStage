@@ -99,6 +99,12 @@ simpleApp.factory('stageFactory', function ($http) {
                 method: 'GET',
                 url: 'http://localhost:8080/statistique/2'
             })
+        },
+        getStageByCity: function (idStage) {
+            return $http({
+                method: 'GET',
+                url: 'http://localhost:8080/statistique/3'
+            })
         }
     }
 })

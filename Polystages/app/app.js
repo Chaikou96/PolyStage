@@ -33,7 +33,6 @@ simpleApp.config(['$routeProvider',
         templateUrl: 'app/views/ajouterStage.html',
         controller: 'ajouterStageController'
       }).
-      //MMM
       when('/statistique', {
         templateUrl: 'app/views/statistique.html',
         controller: 'statistiqueController'

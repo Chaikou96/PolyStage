@@ -41,13 +41,21 @@ controllers.controller('statistiqueController', function ($scope,$rootScope, sta
     $scope.allStagesInfosByLevel = function () {
       stageFactory.getStageByLevel()
       .then(function (success) {
-          //console.log(success)
           $scope.niveau = success.data
-          //console.log($scope.niveau)
           statistiqueFactory.getGrapheLevel($scope.niveau)
       })
     }
     $scope.allStagesInfosByLevel()
+
+  // recuperer le nombre de stages effectués par ville
+    $scope.allStagesInfosByCity = function () {
+      stageFactory.getStageByCity()
+      .then(function (success) {
+          $scope.ville = success.data
+          statistiqueFactory.getGrapheCity($scope.ville)
+      })
+    }
+    $scope.allStagesInfosByCity()
 
 
   $scope.checkIsAdmin()

@@ -141,6 +141,10 @@ div#statYear {
 div#statLevel {
     float: right;
 }
+div#statCity {
+    float: left;
+    width: 300px;
+}
 
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
