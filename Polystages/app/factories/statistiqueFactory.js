@@ -30,7 +30,7 @@ simpleApp.factory('statistiqueFactory', function() {
                         [tab[i].annee.toString(), tab[i].nbre_stage],
                     ]);
                   }
-                  //console.log(data);
+
                   // Dessin du graphique avec les données et les options
                   chart.draw(data, options);
               
