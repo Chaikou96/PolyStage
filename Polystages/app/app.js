@@ -53,6 +53,10 @@ simpleApp.config(['$routeProvider',
         templateUrl: 'app/views/404.html',
         controller: '404Controller'
       }).
+      when('/statistique', {
+        templateUrl: 'app/views/statistique.html',
+        controller: 'statistiqueController'
+      }).
       otherwise({
         redirectTo: '/404'
       })

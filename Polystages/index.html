@@ -50,6 +50,11 @@
                                 <i class="fa fa-search text-primary"></i> &nbsp; Rechercher un stage
                             </a>
                         </li>
+                        <li ng-if="$root.admin == 1">
+                            <a class="collapsible-header waves-effect arrow-r" href="#!/statistique">
+                                <i class="fa fa-search text-primary"></i> &nbsp; Statistiques 
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -91,6 +96,8 @@
     <script src="js/fr.js"></script>
     <script src="js/angular-moment.min.js"></script>
     <script src="js/sha512.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
 
     
     <script type="text/javascript" src="app/app.js"></script>
@@ -106,6 +113,7 @@
     <script type="text/javascript" src="app/controllers/404Controller.js"></script>
     <script type="text/javascript" src="app/controllers/rechercherStageController.js"></script>
     <script type="text/javascript" src="app/controllers/ajouterStageController.js"></script>
+    <script type="text/javascript" src="app/controllers/statistiqueController.js"></script>
 
     <script type="text/javascript" src="app/factories/userFactory.js"></script>
     <script type="text/javascript" src="app/factories/questionsFactory.js"></script>
@@ -117,6 +125,8 @@
     <script type="text/javascript" src="app/factories/mailsFactory.js"></script>
     <script type="text/javascript" src="app/factories/convertJsonFactory.js"></script>
     <script type="text/javascript" src="app/factories/toolsFactory.js"></script>
+    <script type="text/javascript" src="app/factories/statistiqueFactory.js"></script>
+
 
     <!-- alertifyjs  -->  
     <!-- JavaScript -->

@@ -352,4 +352,43 @@ Stage.deleteStage = function (idstage, result) {
     });
 };
 
+Stage.getStageByAnnee = function (result) {
+    var query = "SELECT annee, COUNT(annee) as nbre_stage FROM stage GROUP BY annee"
+    db.query(query, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else {
+            result(null, res);
+        }
+    });
+}
+
+Stage.getStageByLevel = function (result) {
+    var query = "SELECT niveau, COUNT(niveau) as nbre FROM stage GROUP BY niveau"
+    db.query(query, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else {
+            result(null, res);
+        }
+    });
+}
+
+Stage.getStageByCity = function (result) {
+    var query = "SELECT ville, COUNT(ville) as nbre_stage FROM `stage` GROUP BY ville"
+    db.query(query, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else {
+            result(null, res);
+        }
+    });
+}
+
 module.exports = Stage;

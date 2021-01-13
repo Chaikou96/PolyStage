@@ -149,4 +149,14 @@ module.exports = function (app) {
   // donwload fichier stages.csv
   app.route('/downloadFileStagesCSV')
     .get(ConvertJson.downloadStagesCsv)
+  
+  // Routes pour les stats
+  app.route('/statistique/1')
+    .get(StageControlleur.list_stage_byAnnee);
+  
+  app.route('/statistique/2')
+    .get(StageControlleur.list_stage_byLevel);
+
+  app.route('/statistique/3')
+    .get(StageControlleur.list_stage_byCity);
 };
