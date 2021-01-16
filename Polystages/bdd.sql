@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  ven. 08 jan. 2021 à 09:05
+-- Généré le :  sam. 16 jan. 2021 à 16:30
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.4.1
 
@@ -494,7 +494,6 @@ INSERT INTO `stage` (`idstage`, `ideleve`, `niveau`, `annee`, `idtuteur`, `idens
 (1, 1, '4', 2022, 1, 4, '2019-09-20', '2019-11-16', 2, 'Chef de projet junior', 'Stage dev web ', 'Castellane 13006', NULL, './public/2020/5A/2020_5A_BECHARI_Bilal_rapport.pdf', '2019-04-06 22:00:00', './public/2020/5A/2020_5A_BECHARI_Bilal_presentation.pdf', NULL, NULL, NULL, NULL, 0, '2018-01-01', '2018-01-01', '2018-01-01', NULL, NULL, 'Marseille', 'France'),
 (84, 3, '5', 2020, 2, 2, '2019-12-14', '2019-12-14', 23, 'Sharepoint admin', 'automatisation', NULL, NULL, './public/2020/5A/2020_5A_BECHARI_Bilal_rapport.pdf', '2020-12-19 23:00:00', './public/2020/5A/2020_5A_BECHARI_Bilal_presentation.pdf', '2020-01-15 23:00:00', './public/2020/5A/2020_5A_BECHARI_Bilal_evaluation.pdf', '2020-01-16 07:53:12', '2020-01-15 18:20:48', 0, '2020-01-30', '2020-01-31', '2020-02-25', '2020-01-15 17:44:20', './public/2020/5A/2020_5A_BECHARI_Bilal_competences.pdf', '', ''),
 (93, 2, '5', 2020, 4, 5, '2020-01-16', '2020-01-31', 14, 'API Designer', 'Developpement d\'application et API REST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 15:18:59', 0, NULL, NULL, NULL, NULL, NULL, '', ''),
-(95, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 15:18:59', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (96, 2, '5', 2020, 2, 5, '2020-01-16', '2020-01-31', 14, 'API Designer', 'Developpement d\'application et API REST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 15:18:59', 0, NULL, NULL, NULL, NULL, NULL, '', ''),
 (185, 3, '5', 2016, 3, 2, '2019-03-06', '2019-03-06', 1, 'Développement logiciel pour campings dans l\'équipe R&D de Sequoiasoft', 'Stage développement de logiciel interne', 'Vieux port', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', ''),
 (190, 3, '5', 2015, 3, 2, '2019-03-06', NULL, 1, 'Développement logiciel pour campings dans l\'équipe R&D de Sequoiasoft', 'Stage développement de logiciel interne', 'Vieux port', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, '', ''),
@@ -522,7 +521,7 @@ CREATE TABLE `tuteurs` (
 --
 
 INSERT INTO `tuteurs` (`idtuteur`, `nom`, `prenom`, `emailtuteur`, `identreprise`, `mdp`) VALUES
-(1, 'BERGONZI', 'Ludovic', 'bilal.bechari@etu.univ-amu.fr', 23, '26ebce7bfaa8ce18231636c43a407b3a3af56440495640eda8e750b14cd374382895336d6107f273419c9c0b211c90d0aeee2ba305ee8cc7c128746d5e0eeedd'),
+(1, 'BERGONZI', 'Ludovic', 'bilal.bechari@etu.univ-amu.fr', 23, '0aa41b6c2f75abc64c93636bd5094cb3c22e852acd277dc20982720f3a5f252464f2c1a0ae3f9c11d07c325a60932a6bfdf9211b30c8c583c0fcffd2dfde6121'),
 (2, 'REVAUX', 'Nathalie', 'bilal.bechari+84@etu.univ-amu.fr', 14, '46fc474dc2f425822acbd75c936a518564d538eeebc47bc1af3f036bb5b7a3add6772d14609a40ef913e52de4ed4bb716c1cc772961a1ecf87fb105cbfb81534'),
 (3, 'KASTANEK', 'Stan', 'test@etu.univ-amu.fr', 2, 'd1c6da166724bc0c900e5205c85c94fa8066e514e1f9b61486fed0268ef39ff0a1e94ea8536173070bbe8412f995d305a2443af85717df73fe5ad54044f779c6'),
 (4, 'tuteurnom', 'tuteurprenom', 'isabelle.gumos@etu.univ-amu.fr', 78, 'f4afb2a611e280b7993c440e8af39e956218f62cc989a85bf1745d800dd73d5df99ee0c6f296ee408699602170e7a79c1de883bf1e63d73e88a0445af1dbcf5e'),
